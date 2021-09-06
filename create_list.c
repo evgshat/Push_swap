@@ -5,10 +5,10 @@ int	create_list(int argc, char *argv)
 	int			i;
 	t_struct	structura;
 
-	i = 1;
-	while (i <= argc)
+	i = 0;
+	while (i < argc)
 	{
-		structura.chislo[i] = argv[i] + '0';
+		structura.chislo[i] = ft_atoi(&argv[i]);
 		i++;
 	}
 	// printf("%d\n%d\n%d\n", structura.chislo[1], structura.chislo[2], structura.chislo[3]);
