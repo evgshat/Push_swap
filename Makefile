@@ -1,14 +1,19 @@
-SRCS := main.c\
-		is_digital.c\
-		create_list.c\
-		utils.c
-
+SRCS := utils.c \
+		is_chislo.c \
+		create_list.c \
+		main.c \
+		init_list.c \
+		addelem.c \
+		delelem.c
 
 OBJS = $(SRCS:.c=.o)
 
 NAME = push_swap.a
 
 CFLAGS = -Werror -Wall -Wextra -c -g
+
+# $(CC) $(CFLAGS) $< -I ${HEADER} -o $(<:.c=.o)
+
 CC = gcc
 
 RM = rm -rf
@@ -16,7 +21,7 @@ RM = rm -rf
 HEADER = push_swap.h
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $< -I ${HEADER} -o $(<:.c=.o)
+	$(CC) -c $< -I ${HEADER}
 
 all: $(NAME)
 

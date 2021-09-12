@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   addelem.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/12 18:25:35 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/09/12 18:29:22 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-
-typedef struct s_list
+t_list *addelem(t_list *stack, char *new_chislo)
 {
-	int chislo;
-	int	*prev;
-	int	*next;
-}	t_list;
+	t_list *temp;
+	t_list *p;
+	int		chislo;
 
-t_list		*create_list(int argc, char **argv);
-int			is_chislo(int argc, char **argv);
-int			ft_atoi(const char *string);
-// работа с списками
-t_list		*init_list(char *str);
-t_list		*addelem(t_list *stack, char *new_chislo);
-t_list		*delelem(t_list *stack);
-t_list		*delhead(t_list *root);
-
-#endif
+	chislo = ft_atoi(new_chislo);
+	temp = (t_list*)malloc(sizeof(t_list)); //создаваемый
+	p = (t_list *)stack->next;
+	stack->next = (int *)temp;
+	temp->chislo = chislo;
+	stack->next = (int *)p;
+	temp->prev = (int *)stack;
+	if (p != NULL)
+		p->prev = (int *)temp;
+	return (temp);
+}
