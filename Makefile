@@ -4,7 +4,8 @@ SRCS := utils.c \
 		main.c \
 		init_list.c \
 		addelem.c \
-		delelem.c
+		delelem.c \
+		sa.c
 
 OBJS = $(SRCS:.c=.o)
 

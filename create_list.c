@@ -14,7 +14,8 @@ t_list	*create_list(int argc, char **argv)
 		i++;
 	}
 	printf("%d\n", stack->chislo);
-	stack = stack - 1;
+	stack = (t_list *)stack->prev;
 	printf("%d\n", stack->chislo);
+	// stack = stack->prev;
 	return (stack);
 }
