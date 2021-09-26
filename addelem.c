@@ -6,31 +6,27 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/12 19:32:10 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/09/24 22:07:44 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list *addelem(t_list *stack, char *new_chislo)
+t_list	*addelem(t_list **stack, char *new_chislo)
 {
-	t_list *temp;
-	t_list *p;
-	int		chislo;
+	t_list	*temp;
+	t_list	*p;
+	int		number;
 
-	if (stack->next != NULL)
-	{
-		while (stack->next != NULL)
-			stack = (t_list *)stack->next;
-	}
-	chislo = ft_atoi(new_chislo);
-	temp = (t_list*)malloc(sizeof(t_list)); //создаваемый
-	p = (t_list *)stack->next;
-	stack->next = temp;
-	temp->chislo = chislo;
+	number = ft_atoi(new_chislo);
+	temp = malloc(sizeof(t_list)); //создаваемый
+	p = (*stack)->next;
+	(*stack)->next = temp;
+	temp->chislo = number;
 	temp->next = p;
-	temp->prev = stack;
+	temp->prev = *stack;
 	if (p != NULL)
 		p->prev = temp;
+	printf("%d\n", (*stack)->chislo);
 	return (temp);
 }

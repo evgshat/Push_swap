@@ -5,7 +5,7 @@ SRCS := utils.c \
 		init_list.c \
 		addelem.c \
 		delelem.c \
-		sa.c
+		sa_or_sb.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -29,6 +29,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
+
 clean:
 	$(RM) $(OBJS)
 
@@ -38,3 +39,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# all: $(NAME)
+
+# $(NAME): $(OBJS)
+# 	ar rcs $(NAME) $(OBJS)
