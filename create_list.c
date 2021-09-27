@@ -13,8 +13,8 @@ t_list	*create_list(int argc, char **argv)
 		stack = addelem(&stack, argv[i]);
 		i++;
 	}
-	printf("%d\n", stack->chislo);
-	printf("%s\n", "end of create list");
+	// printf("%d\n", stack->chislo);
+	// printf("%s\n", "end of create list");
 	return (stack);
 }
 

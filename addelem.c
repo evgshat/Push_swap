@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/24 22:07:44 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/09/28 01:29:52 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*addelem(t_list **stack, char *new_chislo)
 	int		number;
 
 	number = ft_atoi(new_chislo);
-	temp = malloc(sizeof(t_list)); //создаваемый
+	temp = malloc(sizeof(t_list));
 	p = (*stack)->next;
 	(*stack)->next = temp;
 	temp->chislo = number;
@@ -27,6 +27,6 @@ t_list	*addelem(t_list **stack, char *new_chislo)
 	temp->prev = *stack;
 	if (p != NULL)
 		p->prev = temp;
-	printf("%d\n", (*stack)->chislo);
+	// printf("%d\n", (*stack)->chislo);
 	return (temp);
 }
