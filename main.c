@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	after_main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_list	*stack;
 	int		res;
@@ -10,20 +10,11 @@ int	after_main(int argc, char **argv)
 		return (0);
 	stack = create_list(argc, argv);
 	// sa_or_sb(&stack);
-	check_pa_or_pb(&stack);
+	// check_pa_or_pb(&stack);
 	// ra(&stack, 1);
-	return (0);
-}
-
-int	main(void)
-{
-	char	**argv;
-	argv[0] = "имя_программы";
-	argv[1] = "1";
-	argv[2] = "2";
-	argv[3] = "6";
-	argv[4] = "11";
-	after_main(5, argv);
+	printf("%d\n%d\n%d\n\n", stack->chislo, stack->prev->chislo, stack->prev->prev->chislo);
+	sort_three_el(&stack);
+	printf("%d\n%d\n%d\n", stack->chislo, stack->prev->chislo, stack->prev->prev->chislo);
 	return (0);
 }
 

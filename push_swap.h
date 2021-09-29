@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/28 01:15:20 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/09/29 23:07:04 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ typedef struct s_list
 	int				chislo;
 	struct s_list	*prev;
 	struct s_list	*next;
+	int				order;
 }	t_list;
 
 t_list		*create_list(int argc, char **argv);
 int			is_chislo(int argc, char **argv);
 int			ft_atoi(const char *string);
+char		*ft_strdup(const char *str);
 // работа с списками
 t_list		*init_list(char *str);
 t_list		*addelem(t_list **stack, char *new_chislo);
@@ -50,5 +52,9 @@ void		rrb(t_list **stack, int is_rrr);
 void		rrr(t_list **stack_a, t_list **stack_b);
 // check
 void		check_pa_or_pb(t_list **stack_a);
+
+//sort
+void	sort_two_el(t_list	**stack);
+void	sort_three_el(t_list	**stack);
 
 #endif
