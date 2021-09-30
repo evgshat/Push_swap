@@ -3,21 +3,22 @@
 void	rra(t_list **stack, int is_rrr)
 {
 	t_list	*buf;
+	t_list	*bbuf;
 
 	if (*stack == NULL || (*stack)->prev == NULL)
 		return ;
 	while ((*stack)->prev != NULL)
 		*stack = (*stack)->prev;
 	buf = *stack;
-	*stack = NULL;
-	(*stack) = (*stack)->next;
+	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	while ((*stack)->next != NULL)
 		*stack = (*stack)->next;
+	bbuf = *stack;
 	(*stack)->next = buf;
-	buf->prev = *stack;
-	buf->next = NULL;
-	*stack = (*stack)->next;
+	(*stack) = (*stack)->next;
+	(*stack)->next = NULL;
+	(*stack)->prev = bbuf;
 	if (!is_rrr)
 		write(1, "rra\n", 4);
 }
@@ -25,21 +26,22 @@ void	rra(t_list **stack, int is_rrr)
 void	rrb(t_list **stack, int is_rrr)
 {
 	t_list	*buf;
+	t_list	*bbuf;
 
 	if (*stack == NULL || (*stack)->prev == NULL)
 		return ;
 	while ((*stack)->prev != NULL)
 		*stack = (*stack)->prev;
 	buf = *stack;
-	*stack = NULL;
-	(*stack) = (*stack)->next;
+	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	while ((*stack)->next != NULL)
 		*stack = (*stack)->next;
+	bbuf = *stack;
 	(*stack)->next = buf;
-	buf->prev = *stack;
-	buf->next = NULL;
-	*stack = (*stack)->next;
+	(*stack) = (*stack)->next;
+	(*stack)->next = NULL;
+	(*stack)->prev = bbuf;
 	if (!is_rrr)
 		write(1, "rrb\n", 4);
 }

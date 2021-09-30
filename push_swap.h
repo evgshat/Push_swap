@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/29 23:07:04 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/09/30 22:33:19 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ typedef struct s_list
 	struct s_list	*next;
 	int				order;
 }	t_list;
+
+typedef struct s_stack_els
+{
+	int	a;
+	int	b;
+	int	c;
+	int	d;
+} t_stack_els;
+
 
 t_list		*create_list(int argc, char **argv);
 int			is_chislo(int argc, char **argv);
@@ -56,5 +65,6 @@ void		check_pa_or_pb(t_list **stack_a);
 //sort
 void	sort_two_el(t_list	**stack);
 void	sort_three_el(t_list	**stack);
+void	sort_four_el(t_list	**stack_a, t_list	**stack_b);
 
 #endif

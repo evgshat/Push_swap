@@ -8,15 +8,15 @@ void	sort_three_el(t_list	**stack)
 	{
 		sa(stack, 0);
 		if ((*stack)->chislo > (*stack)->prev->chislo)
-			rra(stack, 0);
+			ra(stack, 0);
 	}
 	else
 	{
-		rra(stack, 0);
+		ra(stack, 0);
 		if ((*stack)->chislo > (*stack)->prev->chislo)
 		{
 			if ((*stack)->chislo > (*stack)->prev->prev->chislo)
-				rra(stack, 0);
+				ra(stack, 0);
 			else
 				sa(stack, 0);
 		}
