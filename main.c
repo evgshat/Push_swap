@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	// printf("%d\n%d\n%d\n\n",stack->chislo, stack->prev->chislo, stack->prev->prev->chislo);
 	// sort_three_el(&stack);
 	// printf("%d\n%d\n%d\n", stack->chislo, stack->prev->chislo, stack->prev->prev->chislo);
-	sort_four_el(&stack_a, &stack_b);
+	sort_five_el(&stack_a, &stack_b);
 	while (stack_a != NULL)
 	{
 		printf("%d\n", stack_a->chislo);

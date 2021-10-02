@@ -13,7 +13,8 @@ SRCS = addelem.c \
 		ft_strdup.c \
 		sort_three_el.c \
 		rra_rrb_rrr.c \
-		sort_four_el.c
+		sort_four_el.c \
+		sort_five_el.c
 
 OBJS = $(SRCS:.c=.o)
 

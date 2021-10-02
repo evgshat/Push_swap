@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/30 22:33:19 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:58:44 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_stack_els
 	int	b;
 	int	c;
 	int	d;
+	int	e;
 } t_stack_els;
 
 
@@ -66,5 +67,6 @@ void		check_pa_or_pb(t_list **stack_a);
 void	sort_two_el(t_list	**stack);
 void	sort_three_el(t_list	**stack);
 void	sort_four_el(t_list	**stack_a, t_list	**stack_b);
+void	sort_five_el(t_list	**stack_a, t_list	**stack_b);
 
 #endif
