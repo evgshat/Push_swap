@@ -1,6 +1,8 @@
 #include "push_swap.h"
 
-t_list	*create_list(int argc, char **argv)
+static void paste_order(t_list **stack, int	*massiv, int argc);
+
+t_list	*create_list(int argc, char **argv, int *massiv)
 {
 	int			i;
 	t_list		*stack;
@@ -13,9 +15,30 @@ t_list	*create_list(int argc, char **argv)
 		stack = addelem(&stack, argv[i]);
 		i++;
 	}
+	paste_order(&stack, massiv, argc);
 	// printf("%d\n", stack->chislo);
 	// printf("%s\n", "end of create list");
 	return (stack);
 }
 
-// gcc addelem.c delelem.c init_list.c is_chislo.c main.c sa_or_sb.c ss.c utils.c create_list.c -g -o a.out
+static void paste_order(t_list **stack, int	*massiv, int argc)
+{
+	int		i; // по листу + порядок + по массиву
+	int		m; // по массиву
+	t_list	*p;
+
+	i = 1;
+	m = 0;
+	while (i < argc)
+	{
+		p = *stack;
+		while (p->chislo != massiv[m])
+			p = p->prev;
+		if (p->chislo == massiv[m])
+		{
+			p->order = i;
+			i++;
+			m++;
+		}
+	}
+}

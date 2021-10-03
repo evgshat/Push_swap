@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/03 01:58:44 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/03 20:46:55 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_list
 	struct s_list	*prev;
 	struct s_list	*next;
 	int				order;
+	int				flag;
 }	t_list;
 
 typedef struct s_stack_els
@@ -34,8 +35,19 @@ typedef struct s_stack_els
 	int	e;
 } t_stack_els;
 
+typedef struct s_data
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		*massiv;
+	int		res;
+	int		flag;
+	int		next;
+} t_data;
 
-t_list		*create_list(int argc, char **argv);
+// massiv_and_list
+t_list		*create_list(int argc, char **argv, int *massiv);
+int			*create_massiv(int argc, char **argv);
 int			is_chislo(int argc, char **argv);
 int			ft_atoi(const char *string);
 char		*ft_strdup(const char *str);
@@ -62,11 +74,12 @@ void		rrb(t_list **stack, int is_rrr);
 void		rrr(t_list **stack_a, t_list **stack_b);
 // check
 void		check_pa_or_pb(t_list **stack_a);
-
 //sort
 void	sort_two_el(t_list	**stack);
 void	sort_three_el(t_list	**stack);
 void	sort_four_el(t_list	**stack_a, t_list	**stack_b);
 void	sort_five_el(t_list	**stack_a, t_list	**stack_b);
+//algoritm
+void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
 
 #endif
