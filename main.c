@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static int init_next_el(t_list **stack_a);
+// static int init_next_el(t_list **stack_a);
 
 int	main(int argc, char **argv)
 {
@@ -13,15 +13,18 @@ int	main(int argc, char **argv)
 	data.massiv = create_massiv(argc, argv);
 	data.stack_a = create_list(argc, argv, data.massiv);
 	data.next = 1;
+	data.argc = argc;
+	data.stack_b = NULL;
+	sort_five_el(&data.stack_a, &data.stack_b);
 	// data.next = init_next_el(&data.stack_a);
 	// printf("%s%d\n", "next=", data.next);
-	// while (data.stack_a != NULL)
-	// {
-	// 	printf("%d %d\n", data.stack_a->chislo, data.stack_a->order);
-	// 	data.stack_a = data.stack_a->prev;
-	// }
-	data.stack_b = init_list("0");
-	algoritm(&data.stack_a, &data.stack_b, &data);
+	while (data.stack_a != NULL)
+	{
+		printf("%d %d\n", data.stack_a->chislo, data.stack_a->order);
+		data.stack_a = data.stack_a->prev;
+	}
+
+	// algoritm(&data.stack_a, &data.stack_b, &data);
 	return (0);
 }
 
@@ -31,16 +34,16 @@ int	main(int argc, char **argv)
 	// 	stack_a = stack_a->prev;
 	// }
 
-static int init_next_el(t_list **stack_a)
-{
-	t_list	*iterator;
+// static int init_next_el(t_list **stack_a)
+// {
+// 	t_list	*iterator;
 
-	iterator = *stack_a;
-	while (iterator != NULL)
-	{
-		if (iterator->order == 1)
-			return (iterator->chislo);
-		iterator = iterator->prev;
-	}
-	return (0);
-}
+// 	iterator = *stack_a;
+// 	while (iterator != NULL)
+// 	{
+// 		if (iterator->order == 1)
+// 			return (iterator->chislo);
+// 		iterator = iterator->prev;
+// 	}
+// 	return (0);
+// }

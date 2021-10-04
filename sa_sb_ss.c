@@ -2,30 +2,34 @@
 
 void	sa(t_list **stack, int is_ss)
 {
-	int	ch_top;
-	int	ch_top_minus;
+	t_list	*ch_top;
+	t_list	*ch_top_minus_minus;
 
-	ch_top = (*stack)->chislo;
+	ch_top = *stack;
+	ch_top_minus_minus = (*stack)->prev->prev;
 	*stack = (*stack)->prev;
-	ch_top_minus = (*stack)->chislo;
-	(*stack)->chislo = ch_top;
-	*stack = (*stack)->next;
-	(*stack)->chislo = ch_top_minus;
+	(*stack)->next = NULL;
+	(*stack)->prev = ch_top;
+	ch_top_minus_minus->next = ch_top;
+	ch_top->next = *stack;
+	ch_top->prev = ch_top_minus_minus;
 	if (!is_ss)
 		write(1, "sa\n", 3);
 }
 
 void	sb(t_list **stack, int is_ss)
 {
-	int	ch_top;
-	int	ch_top_minus;
+	t_list	*ch_top;
+	t_list	*ch_top_minus_minus;
 
-	ch_top = (*stack)->chislo;
+	ch_top = *stack;
+	ch_top_minus_minus = (*stack)->prev->prev;
 	*stack = (*stack)->prev;
-	ch_top_minus = (*stack)->chislo;
-	(*stack)->chislo = ch_top;
-	*stack = (*stack)->next;
-	(*stack)->chislo = ch_top_minus;
+	(*stack)->next = NULL;
+	(*stack)->prev = ch_top;
+	ch_top_minus_minus->next = ch_top;
+	ch_top->next = *stack;
+	ch_top->prev = ch_top_minus_minus;
 	if (!is_ss)
 		write(1, "sa\n", 3);
 }

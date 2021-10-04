@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/03 20:46:55 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/04 22:22:16 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_data
 	int		res;
 	int		flag;
 	int		next;
+	int		argc;
 } t_data;
 
 // massiv_and_list
