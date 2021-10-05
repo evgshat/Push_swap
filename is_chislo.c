@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/09/12 19:57:32 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/05 21:59:07 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_chislo(int argc, char **argv)
 			j++;
 			if (argv[i][j] != '\0')
 			{
-				printf ("%s", "Не число\n");
+				printf ("%s", "Wrong_argument\n");
 				return (0);
 			}
 		}
@@ -47,7 +47,7 @@ int	is_chislo(int argc, char **argv)
 		{
 			if (argv[i][j] < 48 || argv[i][j] > 71)
 			{
-				printf ("%s", "Не число\n");
+				printf ("%s", "Wrong_argument\n");
 				return (0);
 			}
 			j++;
@@ -55,6 +55,5 @@ int	is_chislo(int argc, char **argv)
 		i++;
 		j = 0;
 	}
-	printf ("%s", "Число\n");
 	return (1);
 }

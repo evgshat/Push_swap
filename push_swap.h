@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/04 22:22:16 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/06 01:00:08 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_stack_els
 	int	c;
 	int	d;
 	int	e;
-} t_stack_els;
+}	t_stack_els;
 
 typedef struct s_data
 {
@@ -44,7 +44,7 @@ typedef struct s_data
 	int		flag;
 	int		next;
 	int		argc;
-} t_data;
+}	t_data;
 
 // massiv_and_list
 t_list		*create_list(int argc, char **argv, int *massiv);
@@ -76,11 +76,12 @@ void		rrr(t_list **stack_a, t_list **stack_b);
 // check
 void		check_pa_or_pb(t_list **stack_a);
 //sort
-void	sort_two_el(t_list	**stack);
-void	sort_three_el(t_list	**stack);
-void	sort_four_el(t_list	**stack_a, t_list	**stack_b);
-void	sort_five_el(t_list	**stack_a, t_list	**stack_b);
+void		sort_two_el(t_list	**stack);
+void		sort_three_el(t_list	**stack);
+void		sort_four_el(t_list	**stack_a, t_list	**stack_b);
+void		sort_five_el(t_list	**stack_a, t_list	**stack_b);
 //algoritm
-void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
+void		algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
+int			algoritm_path_two(t_list **stack_a, t_list **stack_b, t_data *data, int mid);
 
 #endif

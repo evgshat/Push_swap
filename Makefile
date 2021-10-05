@@ -16,7 +16,8 @@ SRCS = addelem.c \
 		sort_four_el.c \
 		sort_five_el.c \
 		create_massiv.c \
-		algoritm.c
+		algoritm.c \
+		algoritm_path_two.c
 
 OBJS = $(SRCS:.c=.o)
 

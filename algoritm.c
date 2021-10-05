@@ -5,6 +5,7 @@ static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order, int max)
 static void	shift_rra(t_list **stack_a, int max, int iterator);
 static void	shift_ra(t_list **stack_a, int iterator);
 static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order);
+static void	clear_last_el_in_b(t_list **stack_b);
 
 void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 {
@@ -13,12 +14,13 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 	// написать про 5 элементов (через указатели на ф-ии ????? создать массив указателей на ф-ии)
 	max_order = find_max_order(stack_a);
 	mid_order = max_order/2 + data->next;
-	printf("%s%d\n", "max = ", max_order);
-	printf("%s%d\n", "mid = ", mid_order);
+	// printf("%s%d\n", "max = ", max_order);
+	// printf("%s%d\n", "mid = ", mid_order);
 	put_in_b(stack_a, stack_b, mid_order, max_order);
 	main_shift_ra(stack_a, mid_order, max_order);
-}
-
+	while (mid_order >= 0)
+		mid_order = algoritm_path_two(stack_a, stack_b, data, mid_order);
+	}
 
 static int	find_max_order(t_list **stack_a)
 {
@@ -65,24 +67,12 @@ static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order, int max)
 		mid_order--;
 		max--;
 	}
-	printf("%s\n", "stack_a =");
-	while (*stack_a != NULL)
-	{
-		printf("%d\n", (*stack_a)->chislo);
-		*stack_a = (*stack_a)->prev;
-	}
-	printf("%s\n", "stack_b =");
-
-	while (*stack_b != NULL)
-	{
-		printf("%d\n", (*stack_b)->chislo);
-		*stack_b = (*stack_b)->prev;
-	}
+	clear_last_el_in_b(stack_b);
 }
 
 static void	shift_rra(t_list **stack_a, int max, int iterator)
 {
-	while(max >= iterator)
+	while (max >= iterator)
 	{
 		rra(stack_a, 0);
 		max--;
@@ -91,7 +81,7 @@ static void	shift_rra(t_list **stack_a, int max, int iterator)
 
 static void	shift_ra(t_list **stack_a, int iterator)
 {
-	while(iterator > 1)
+	while (iterator > 1)
 	{
 		ra(stack_a, 0);
 		iterator--;
@@ -106,3 +96,26 @@ static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order)
 		mid_order++;
 	}
 }
+
+static void	clear_last_el_in_b(t_list **stack_b)
+{
+	while ((*stack_b)->prev != NULL)
+		*stack_b = (*stack_b)->prev;
+	(*stack_b)->next->prev = NULL;
+	while ((*stack_b)->next != NULL)
+		*stack_b = (*stack_b)->next;
+}
+
+	// printf("%s\n", "stack_a =");
+	// while (*stack_a != NULL)
+	// {
+	// 	printf("%d\n", (*stack_a)->chislo);
+	// 	*stack_a = (*stack_a)->prev;
+	// }
+	// printf("%s\n", "stack_b =");
+
+	// while (*stack_b != NULL)
+	// {
+	// 	printf("%d\n", (*stack_b)->chislo);
+	// 	*stack_b = (*stack_b)->prev;
+	// }

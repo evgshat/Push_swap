@@ -6,7 +6,7 @@ void	pa(t_list **stack_a, t_list **stack_b)
 
 	buf = *stack_b;
 	*stack_b = (*stack_b)->prev;
-	(*stack_b)->next = NULL;
+	// (*stack_b)->next = NULL;
 	(*stack_a)->next = malloc(sizeof(t_list));
 	(*stack_a)->next->chislo = buf->chislo;
 	(*stack_a)->next->order = buf->order;
