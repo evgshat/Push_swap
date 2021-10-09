@@ -1,11 +1,12 @@
 #include "push_swap.h"
 
 static int	find_max_order(t_list **stack_a);
-static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order, int max);
-static void	shift_rra(t_list **stack_a, int max, int iterator);
-static void	shift_ra(t_list **stack_a, int iterator);
-static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order);
+static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order);
+// static void	shift_rra(t_list **stack_a, int max, int iterator);
+// static void	shift_ra(t_list **stack_a, int iterator);
+// static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order);
 static void	clear_last_el_in_b(t_list **stack_b);
+static t_list *find_last(t_list **stack_a);
 
 void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 {
@@ -16,10 +17,10 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 	mid_order = max_order/2 + data->next;
 	// printf("%s%d\n", "max = ", max_order);
 	// printf("%s%d\n", "mid = ", mid_order);
-	put_in_b(stack_a, stack_b, mid_order, max_order);
-	main_shift_ra(stack_a, mid_order, max_order);
-	while (mid_order >= 0)
-		mid_order = algoritm_path_two(stack_a, stack_b, data, mid_order);
+	put_in_b(stack_a, stack_b, mid_order);
+	// main_shift_ra(stack_a, mid_order, max_order);
+	// while (mid_order >= 0)
+	// 	mid_order = algoritm_path_two(stack_a, stack_b, data, mid_order);
 	}
 
 static int	find_max_order(t_list **stack_a)
@@ -38,64 +39,104 @@ static int	find_max_order(t_list **stack_a)
 	return (max_order);
 }
 
-static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order, int max)
+static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order)
 {
-	t_list	*p;
-	t_list	*iterator;
-	int		i;
+	t_list	*first;
+	t_list	*last;
+	int		count_for_first;
+	int		count_for_last;
 
-	while (mid_order >= 1)
+	count_for_first = 1;
+	count_for_last = 2;
+	first = *stack_a;
+	last = find_last(stack_a);
+	while (!(first == last && first->order > mid_order) || !(first->prev == last))
 	{
-		p = *stack_a;
-		while(p->order != mid_order)
-			p = p->prev;
-		if (p->order == mid_order)
+		if (first->order <= mid_order)
 		{
-			i = 1;
-			iterator = *stack_a;
-			while (iterator->order != mid_order)
-			{
-				i++;
-				iterator = iterator->prev;
-			}
-			if (i >= mid_order)
-				shift_rra(stack_a, max, i);
-			else
-				shift_ra(stack_a, i);
 			pb(stack_a, stack_b);
+			first = *stack_a;
+			count_for_first = 1;
 		}
-		mid_order--;
-		max--;
+		else if (last->order <= mid_order)
+		{
+			last = last->next;
+			count_for_last = 2;
+			rra(stack_a, 0);
+			pb(stack_a, stack_b);
+			first = *stack_a;
+			count_for_first = 1;
+		}
+		else
+		{
+			first = first->prev;
+			count_for_first++;
+			if (first->order <= mid_order && count_for_first <= count_for_last)
+			{
+				while (count_for_first != 1)
+				{
+					if (count_for_first == 2)
+						sa(stack_a, 0);
+					else
+					{
+						ra(stack_a, 0);
+						last = last->prev;
+						count_for_last = 2;
+					}
+					count_for_first--;
+				}
+				pb(stack_a, stack_b);
+				first = *stack_a;
+				count_for_first = 1;
+				continue ;
+			}
+			last = last->next;
+			count_for_last++;
+			if (last->order <= mid_order && count_for_last <= count_for_first)
+			{
+				while (count_for_last != 1)
+				{
+					rra(stack_a, 0);
+					count_for_first--;
+				}
+				pb(stack_a, stack_b);
+				first = *stack_a;
+				last = last->next;
+				count_for_first = 1;
+				count_for_last = 2;
+				continue ;
+			}
+		}
 	}
 	clear_last_el_in_b(stack_b);
 }
 
-static void	shift_rra(t_list **stack_a, int max, int iterator)
-{
-	while (max >= iterator)
-	{
-		rra(stack_a, 0);
-		max--;
-	}
-}
+// static void	shift_rra(t_list **stack_a, int max, int iterator)
+// {
+// 	while (max >= iterator)
+// 	{
+// 		rra(stack_a, 0);
+// 		max--;
+// 	}
+// }
 
-static void	shift_ra(t_list **stack_a, int iterator)
-{
-	while (iterator > 1)
-	{
-		ra(stack_a, 0);
-		iterator--;
-	}
-}
+// static void	shift_ra(t_list **stack_a, int iterator)
+// {
+// 	while (iterator > 1)
+// 	{
+// 		ra(stack_a, 0);
+// 		iterator--;
+// 	}
+// }
 
-static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order)
-{
-	while (mid_order <= max_order)
-	{
-		ra(stack_a, 0);
-		mid_order++;
-	}
-}
+// static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order)
+// {
+// 	while (mid_order <= max_order)
+// 	{
+// 		ra(stack_a, 0);
+// 		mid_order++;
+// 	}
+// }
 
 static void	clear_last_el_in_b(t_list **stack_b)
 {
@@ -104,6 +145,16 @@ static void	clear_last_el_in_b(t_list **stack_b)
 	(*stack_b)->next->prev = NULL;
 	while ((*stack_b)->next != NULL)
 		*stack_b = (*stack_b)->next;
+}
+
+static t_list *find_last(t_list **stack_a)
+{
+	t_list	*last;
+
+	last = *stack_a;
+	while (last->prev != NULL)
+		last = last->prev;
+	return (last);
 }
 
 	// printf("%s\n", "stack_a =");
@@ -119,3 +170,35 @@ static void	clear_last_el_in_b(t_list **stack_b)
 	// 	printf("%d\n", (*stack_b)->chislo);
 	// 	*stack_b = (*stack_b)->prev;
 	// }
+
+// 	static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order, int max)
+// {
+// 	t_list	*p;
+// 	t_list	*iterator;
+// 	int		i;
+
+// 	while (mid_order >= 1)
+// 	{
+// 		p = *stack_a;
+// 		while(p->order != mid_order)
+// 			p = p->prev;
+// 		if (p->order == mid_order)
+// 		{
+// 			i = 1;
+// 			iterator = *stack_a;
+// 			while (iterator->order != mid_order)
+// 			{
+// 				i++;
+// 				iterator = iterator->prev;
+// 			}
+// 			if (i >= mid_order)
+// 				shift_rra(stack_a, max, i);
+// 			else
+// 				shift_ra(stack_a, i);
+// 			pb(stack_a, stack_b);
+// 		}
+// 		mid_order--;
+// 		max--;
+// 	}
+// 	clear_last_el_in_b(stack_b);
+// }

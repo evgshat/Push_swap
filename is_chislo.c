@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/05 21:59:07 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/09 13:43:48 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_chislo(int argc, char **argv)
 	int	j;
 
 	i = 1;
-	j = 1;
+	j = 0;
 	if (argc == 1)
 	{
 		printf ("%s", "Пусто\n");
