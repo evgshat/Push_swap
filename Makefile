@@ -1,12 +1,10 @@
 SRCS = addelem.c \
-		delelem.c \
 		init_list.c \
 		is_norm_args.c \
 		main.c \
 		sa_sb_ss.c \
 		utils.c \
 		create_list.c \
-		check_pa_or_pb.c \
 		pa_pb.c \
 		ra_rb_rr.c \
 		sort_two_el.c \
@@ -17,7 +15,7 @@ SRCS = addelem.c \
 		sort_five_el.c \
 		create_massiv.c \
 		algoritm.c \
-		algoritm_path_two.c
+		test.c
 
 OBJS = $(SRCS:.c=.o)
 

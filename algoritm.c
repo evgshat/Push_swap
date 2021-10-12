@@ -2,9 +2,7 @@
 
 static int	find_max_order(t_list **stack_a);
 static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order);
-// static void	shift_rra(t_list **stack_a, int max, int iterator);
-// static void	shift_ra(t_list **stack_a, int iterator);
-// static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order);
+static void less_six (t_list **stack_a, t_list **stack_b, t_data *data);
 static void	clear_last_el_in_b(t_list **stack_b);
 static t_list *find_last(t_list **stack_a);
 
@@ -12,11 +10,14 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 {
 	int	mid_order;
 	int	max_order;
-	// написать про 5 элементов (через указатели на ф-ии ????? создать массив указателей на ф-ии)
+
+	if (data->argc < 7)
+	{
+		less_six(stack_a, stack_a, data);
+		return ;
+	}
 	max_order = find_max_order(stack_a);
 	mid_order = max_order/2 + data->next;
-	// printf("%s%d\n", "max = ", max_order);
-	// printf("%s%d\n", "mid = ", mid_order);
 	put_in_b(stack_a, stack_b, mid_order);
 	// main_shift_ra(stack_a, mid_order, max_order);
 	// while (mid_order >= 0)
@@ -50,15 +51,15 @@ static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order)
 	count_for_last = 2;
 	first = *stack_a;
 	last = find_last(stack_a);
-	while (!(first == last && first->order > mid_order) || !(first->prev == last))
+	while (!(first == last && first->order > mid_order) && !(first->next == last))
 	{
-		if (first->order <= mid_order)
+		if (first->order <= mid_order && first == *stack_a)
 		{
 			pb(stack_a, stack_b);
 			first = *stack_a;
 			count_for_first = 1;
 		}
-		else if (last->order <= mid_order)
+		else if (last->order <= mid_order && last == find_last(stack_a))
 		{
 			last = last->next;
 			count_for_last = 2;
@@ -76,8 +77,8 @@ static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order)
 				while (count_for_first != 1)
 				{
 					if (count_for_first == 2)
-						sa(stack_a, 0);
-					else
+						sa(stack_a, 0); // или ra
+					else if (count_for_first != 2 || (count_for_first == 2 && first->prev && first->prev->prev && first->prev->prev->order <= mid_order))
 					{
 						ra(stack_a, 0);
 						last = last->prev;
@@ -97,46 +98,18 @@ static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order)
 				while (count_for_last != 1)
 				{
 					rra(stack_a, 0);
-					count_for_first--;
+					count_for_last--;
 				}
 				pb(stack_a, stack_b);
 				first = *stack_a;
 				last = last->next;
 				count_for_first = 1;
 				count_for_last = 2;
-				continue ;
 			}
 		}
 	}
 	clear_last_el_in_b(stack_b);
 }
-
-// static void	shift_rra(t_list **stack_a, int max, int iterator)
-// {
-// 	while (max >= iterator)
-// 	{
-// 		rra(stack_a, 0);
-// 		max--;
-// 	}
-// }
-
-// static void	shift_ra(t_list **stack_a, int iterator)
-// {
-// 	while (iterator > 1)
-// 	{
-// 		ra(stack_a, 0);
-// 		iterator--;
-// 	}
-// }
-
-// static void	main_shift_ra(t_list **stack_a, int mid_order, int max_order)
-// {
-// 	while (mid_order <= max_order)
-// 	{
-// 		ra(stack_a, 0);
-// 		mid_order++;
-// 	}
-// }
 
 static void	clear_last_el_in_b(t_list **stack_b)
 {
@@ -157,48 +130,33 @@ static t_list *find_last(t_list **stack_a)
 	return (last);
 }
 
-	// printf("%s\n", "stack_a =");
-	// while (*stack_a != NULL)
-	// {
-	// 	printf("%d\n", (*stack_a)->chislo);
-	// 	*stack_a = (*stack_a)->prev;
-	// }
-	// printf("%s\n", "stack_b =");
+static void less_six (t_list **stack_a, t_list **stack_b, t_data *data)
+{
+	void (*funcs_1) (t_list **stack_a);
+	void (*funcs_2) (t_list **stack_a, t_list **stack_b);
 
-	// while (*stack_b != NULL)
-	// {
-	// 	printf("%d\n", (*stack_b)->chislo);
-	// 	*stack_b = (*stack_b)->prev;
-	// }
-
-// 	static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order, int max)
-// {
-// 	t_list	*p;
-// 	t_list	*iterator;
-// 	int		i;
-
-// 	while (mid_order >= 1)
-// 	{
-// 		p = *stack_a;
-// 		while(p->order != mid_order)
-// 			p = p->prev;
-// 		if (p->order == mid_order)
-// 		{
-// 			i = 1;
-// 			iterator = *stack_a;
-// 			while (iterator->order != mid_order)
-// 			{
-// 				i++;
-// 				iterator = iterator->prev;
-// 			}
-// 			if (i >= mid_order)
-// 				shift_rra(stack_a, max, i);
-// 			else
-// 				shift_ra(stack_a, i);
-// 			pb(stack_a, stack_b);
-// 		}
-// 		mid_order--;
-// 		max--;
-// 	}
-// 	clear_last_el_in_b(stack_b);
-// }
+	if (data->argc < 7)
+	{
+		if (data->argc == 3)
+		{
+			funcs_1 = sort_two_el;
+			funcs_1(stack_a);
+		}
+		else if (data->argc == 4)
+		{
+			funcs_1 = sort_three_el;
+			funcs_1(stack_a);
+		}
+		else if (data->argc == 5)
+		{
+			funcs_2 = sort_four_el;
+			funcs_2(stack_a, stack_b);
+		}
+		else if (data->argc == 6)
+		{
+			funcs_2 = sort_five_el;
+			funcs_2(stack_a, stack_b);
+		}
+		return ;
+	}
+}

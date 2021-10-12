@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/03 20:21:49 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/12 15:24:21 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ t_list	*addelem(t_list **stack, char *new_chislo)
 	temp->chislo = number;
 	temp->next = p;
 	temp->prev = *stack;
-	temp->flag = 0;
+	temp->keep_a = 0;
+	temp->head = 0;
 	if (p != NULL)
 		p->prev = temp;
-	// printf("%d\n", (*stack)->chislo);
 	return (temp);
 }
+

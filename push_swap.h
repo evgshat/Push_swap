@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/11 23:04:43 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/12 16:40:39 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct s_list
 	struct s_list	*prev;
 	struct s_list	*next;
 	int				order;
-	int				flag;
+	int				head;
+	int				keep_a;
 }	t_list;
 
 typedef struct s_stack_els
@@ -52,11 +53,8 @@ int			*create_massiv(int argc, char **argv);
 int			is_norm_args(int argc, char **argv);
 int			ft_atoi(const char *string);
 char		*ft_strdup(const char *str);
-// работа с списками
 t_list		*init_list(char *str);
 t_list		*addelem(t_list **stack, char *new_chislo);
-t_list		*delelem(t_list *stack);
-t_list		*delhead(t_list *root);
 
 // инструкции
 void		sa(t_list **stack, int is_ss);
@@ -73,15 +71,17 @@ void		rr(t_list **stack_a, t_list **stack_b);
 void		rra(t_list **stack, int is_rrr);
 void		rrb(t_list **stack, int is_rrr);
 void		rrr(t_list **stack_a, t_list **stack_b);
+
 // check
-void		check_pa_or_pb(t_list **stack_a);
-//sort
+void test(t_list **stack_a, t_list **stack_b);
+
+// sort
 void		sort_two_el(t_list	**stack);
 void		sort_three_el(t_list	**stack);
 void		sort_four_el(t_list	**stack_a, t_list	**stack_b);
 void		sort_five_el(t_list	**stack_a, t_list	**stack_b);
-//algoritm
-void		algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
-int			algoritm_path_two(t_list **stack_a, t_list **stack_b, t_data *data, int mid);
 
+// algoritm
+void		algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
+void	alg_brazh(t_list **stack_a, int argc);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/03 20:21:44 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/12 16:43:18 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ t_list	*init_list(char *str)
 	stack->chislo = number;
 	stack->prev = 0;
 	stack->next = 0;
-	stack->flag = 0;
-	// printf("%d\n", stack->chislo);
-	// printf("%s\n", "end of init_list");
+	stack->keep_a = 0;
+	stack->head = 0;
 	return (stack);
 }
