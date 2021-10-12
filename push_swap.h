@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/06 01:00:08 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/11 23:04:43 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_data
 // massiv_and_list
 t_list		*create_list(int argc, char **argv, int *massiv);
 int			*create_massiv(int argc, char **argv);
-int			is_chislo(int argc, char **argv);
+int			is_norm_args(int argc, char **argv);
 int			ft_atoi(const char *string);
 char		*ft_strdup(const char *str);
 // работа с списками

@@ -1,7 +1,7 @@
 SRCS = addelem.c \
 		delelem.c \
 		init_list.c \
-		is_chislo.c \
+		is_norm_args.c \
 		main.c \
 		sa_sb_ss.c \
 		utils.c \

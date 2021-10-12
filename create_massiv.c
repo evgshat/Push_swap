@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 static int	*sort_massiv(int *massiv, int argc);
-static void obmen(int *m_first, int *m_second, int *massiv);
+static void	obmen(int *m_first, int *m_second, int *massiv);
 
 int	*create_massiv(int argc, char **argv)
 {
@@ -20,19 +20,7 @@ int	*create_massiv(int argc, char **argv)
 		m++;
 		i++;
 	}
-	// m = 0;
-	// while (m < (argc - 1))
-	// {
-	// 	printf("%d\n", massiv[m]);
-	// 	m++;
-	// }
 	massiv = sort_massiv(massiv, argc);
-	// m = 0;
-	// while (m < (argc - 1))
-	// {
-	// 	printf("%d\n", massiv[m]);
-	// 	m++;
-	// }
 	return (massiv);
 }
 
@@ -67,7 +55,7 @@ static int	*sort_massiv(int *massiv, int argc)
 	return (massiv);
 }
 
-static void obmen(int *m_first, int *m_second, int *massiv)
+static void	obmen(int *m_first, int *m_second, int *massiv)
 {
 	int	temp;
 
