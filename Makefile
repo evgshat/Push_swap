@@ -15,7 +15,10 @@ SRCS = addelem.c \
 		sort_five_el.c \
 		create_massiv.c \
 		algoritm.c \
-		test.c
+		test.c \
+		put_in_a.c \
+		back_to_b.c \
+		sort_second_half.c
 
 OBJS = $(SRCS:.c=.o)
 

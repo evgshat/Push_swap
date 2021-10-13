@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_chislo.c                                        :+:      :+:    :+:   */
+/*   is_norm_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/11 23:04:08 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/13 21:37:54 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static int	check_double(int argc, char **argv);
 static int	check_number(int argc, char **argv, int num, int i);
+static int	already_sort(int argc, char **argv);
 
 int	is_norm_args(int argc, char **argv)
 {
 	int	i;
 	int	j;
 	int	is_double;
+	int	alr_sort;
 
 	i = 1;
 	j = 0;
@@ -65,6 +67,9 @@ int	is_norm_args(int argc, char **argv)
 		printf ("%s", "Wrong_argument\n");
 		return (-1);
 	}
+	alr_sort = already_sort(argc, argv);
+	if (alr_sort == 0)
+		return (2);
 	return (0);
 }
 
@@ -97,6 +102,21 @@ static int	check_number(int argc, char **argv, int num, int i)
 		if (all_num == num)
 			return (-1);
 		i++;
+	}
+	return (0);
+}
+
+static int already_sort(int argc, char **argv)
+{
+	int	i;
+
+	i = argc - 1;
+	while (i > 1)
+	{
+		if (ft_atoi(argv[i]) > ft_atoi(argv[i - 1]))
+			i--;
+		else
+			return (-1);
 	}
 	return (0);
 }

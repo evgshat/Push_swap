@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/12 16:40:39 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/13 21:52:09 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ typedef struct s_list
 	struct s_list	*prev;
 	struct s_list	*next;
 	int				order;
-	int				head;
-	int				keep_a;
+	int				flag;
 }	t_list;
 
 typedef struct s_stack_els
@@ -83,5 +82,10 @@ void		sort_five_el(t_list	**stack_a, t_list	**stack_b);
 
 // algoritm
 void		algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
-void	alg_brazh(t_list **stack_a, int argc);
+void		alg_brazh(t_list **stack_a, int argc);
+int			put_in_a(t_list **stack_a, t_list **stack_b, t_data *data, int max);
+int			back_to_b(t_list **stack_a, t_list **stack_b);
+int			find_max_order(t_list **stack_a);
+void		sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max);
+
 #endif
