@@ -7,13 +7,13 @@ t_list	*create_list(int argc, char **argv, int *massiv)
 	int			i;
 	t_list		*stack;
 
-	i = 1;
+	i = argc - 1;
 	stack = init_list(argv[i]);
-	i++;
-	while (i < argc)
+	i--;
+	while (i > 0)
 	{
 		stack = addelem(&stack, argv[i]);
-		i++;
+		i--;
 	}
 	paste_order(&stack, massiv, argc);
 	return (stack);
@@ -25,9 +25,9 @@ static void	paste_order(t_list **stack, int	*massiv, int argc)
 	int		m;
 	t_list	*p;
 
-	i = 1;
+	i = argc - 1;
 	m = 0;
-	while (i < argc)
+	while (i > 0)
 	{
 		p = *stack;
 		while (p->chislo != massiv[m])
@@ -35,7 +35,7 @@ static void	paste_order(t_list **stack, int	*massiv, int argc)
 		if (p->chislo == massiv[m])
 		{
 			p->order = i;
-			i++;
+			i--;
 			m++;
 		}
 	}

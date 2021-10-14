@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 21:06:12 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/14 11:41:12 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/14 21:18:57 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,37 @@
 //static int already_sort(t_list **stack_a);
 static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min);
 static t_list *find_last(t_list **stack_b);
+static int	find_max_order_again(t_list **stack);
 
 void	sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min)
 {
-	int	max_for_b;
-	t_list	*last;
-//	while (already_sort(stack_a) != 0)
-//	{
-		max_for_b = put_in_b_again(stack_a, stack_b, data, max, min);
+	int max_for_b;
+	t_list *last;
+	int mid;
+
+	while ((*stack_a)->order != 1)
+	{
+	max_for_b = put_in_b_again(stack_a, stack_b, data, max, min);
+	mid = max_for_b;
+	last = find_last(stack_a);
+	while (last->order != min && data->next < max)
+	{
+		rra(stack_a, 0);
+		last = find_last(stack_a);
+	}
+	while (max_for_b > 0 && data->next < max)
+		max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
+	top_down(stack_a, data);
+	while ((*stack_a)->order <= mid && (*stack_a)->order >= data->next
+		   && data->next < max)
+	{
+		max_for_b = back_to_b(stack_a, stack_b);
 		while (max_for_b > 0)
 			max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
-		put_in_a(stack_a, stack_b, data, max);
-		while ((last = find_last(stack_a))->order != min)
-			ra(stack_a, 0);
-		min = (max - data->next)/2 + data->next;
-//		while ((*stack_a)->order != 1)
-//		{
-			max_for_b = back_to_b(stack_a, stack_b);
-			while (max_for_b > 0)
-				max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
-			while ((*stack_a)->order == data->next)
-			{
-				ra(stack_a, 0);
-				data->next++;
-			}
-//		}
-//	}
+		top_down(stack_a, data);
+	}
+	min = data->next - 1;
+	}
 }
 
 //static int already_sort(t_list **stack_a)
@@ -57,6 +62,24 @@ void	sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max,
 //	}
 //	return (0);
 //}
+
+static int	find_max_order_again(t_list **stack)
+{
+	int		max_order;
+	t_list	*p;
+
+	p = *stack;
+	if (*stack == NULL)
+		return (0);
+	max_order = p->order;
+	while (p != NULL)
+	{
+		if (p->order > max_order)
+			max_order = p->order;
+		p = p->prev;
+	}
+	return (max_order);
+}
 
 static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min)
 {
@@ -141,15 +164,15 @@ static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int 
 			}
 		}
 	}
-	res = find_max_order(stack_b);
+	res = find_max_order_again(stack_b);
 	return (res);
 }
 
-static t_list *find_last(t_list **stack_b)
+static t_list *find_last(t_list **stack)
 {
 	t_list	*last;
 
-	last = *stack_b;
+	last = *stack;
 	if (!last)
 		return NULL;
 	while (last->prev != NULL)

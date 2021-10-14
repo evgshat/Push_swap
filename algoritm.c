@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/14 10:57:54 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/14 21:14:05 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,25 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 	put_in_b(stack_a, stack_b, mid_order);
 	while (max_for_b > 0)
 		max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
-	while ((*stack_a)->order == data->next)
-	{
-		ra(stack_a, 0);
-		data->next++;
-	}
+	top_down(stack_a, data);
 	while ((*stack_a)->flag != 0)
 	{
 		max_for_b = back_to_b(stack_a, stack_b);
 		while (max_for_b > 0)
 			max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
-		while ((*stack_a)->order == data->next)
-		{
-			ra(stack_a, 0);
-			data->next++;
-		}
+		top_down(stack_a, data);
 	}
 	sort_second_half(stack_a, stack_b, data, max_order, mid_order);
 }
 
-int	find_max_order(t_list **stack_a)
+int	find_max_order(t_list **stack)
 {
 	int		max_order;
 	t_list	*p;
 
-	p = *stack_a;
+	p = *stack;
 	max_order = 0;
-	if (*stack_a == NULL)
+	if (*stack == NULL)
 		return (0);
 	while (p->prev != NULL)
 	{
@@ -71,6 +63,8 @@ int	find_max_order(t_list **stack_a)
 	max_order++;
 	return (max_order);
 }
+
+
 
 static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order)
 {

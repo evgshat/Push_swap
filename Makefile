@@ -18,7 +18,8 @@ SRCS = addelem.c \
 		test.c \
 		put_in_a.c \
 		back_to_b.c \
-		sort_second_half.c
+		sort_second_half.c \
+		top_down.c
 
 OBJS = $(SRCS:.c=.o)
 

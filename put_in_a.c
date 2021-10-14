@@ -1,6 +1,7 @@
 #include "push_swap.h"
 
 static t_list *find_last(t_list **stack_b);
+static int	find_max_order_again(t_list **stack);
 
 int	put_in_a(t_list **stack_a, t_list **stack_b, t_data *data, int max)
 {
@@ -105,8 +106,26 @@ int	put_in_a(t_list **stack_a, t_list **stack_b, t_data *data, int max)
 			}
 		}
 	}
-	res = find_max_order(stack_b);
+	res = find_max_order_again(stack_b);
 	return (res);
+}
+
+static int	find_max_order_again(t_list **stack)
+{
+	int		max_order;
+	t_list	*p;
+
+	if (*stack == NULL)
+		return (0);
+	p = *stack;
+	max_order = p->order;
+	while (p != NULL)
+	{
+		if (p->order > max_order)
+			max_order = p->order;
+		p = p->prev;
+	}
+	return (max_order);
 }
 
 static t_list *find_last(t_list **stack_b)
