@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/13 21:50:21 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/14 10:57:54 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,7 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 			data->next++;
 		}
 	}
-	sort_second_half(stack_a, stack_b, data, max_order);
-		//
-//	max_for_b = back_to_b(stack_a, stack_b);
-//	while (max_for_b > 0)
-//		max_for_b = put_in_a_again(stack_a, stack_b, data, max_for_b);
-//	while ((*stack_a)->order == data->next)
-//	{
-//		ra(stack_a, 0);
-//		data->next++;
-//	}
-	//
-//	max_for_b = back_to_b(stack_a, stack_b);
-//	while (max_for_b > 0)
-//		max_for_b = put_in_a_again(stack_a, stack_b, data, max_for_b);
-//	while ((*stack_a)->order == data->next)
-//	{
-//		ra(stack_a, 0);
-//		data->next++;
-//	}
-
-
+	sort_second_half(stack_a, stack_b, data, max_order, mid_order);
 }
 
 int	find_max_order(t_list **stack_a)

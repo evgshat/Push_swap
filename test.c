@@ -2,7 +2,7 @@
 
 void test(t_list **stack_a, t_list **stack_b)
 {
-	printf("%s\n%s\n%s\n%s\n", "------------------------", "stack_a", "------------------------", "value | order | flag |");
+	printf("%s\n%s\n%s\n%s\n", "------------------------", "stack_a", "------------------------", "value | order |   flag |");
 	while (*stack_a != NULL)
 	{
 		printf("%6d", (*stack_a)->chislo);
