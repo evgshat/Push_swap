@@ -51,6 +51,6 @@ void	rrr(t_list **stack_a, t_list **stack_b)
 	if (*stack_a == NULL || (*stack_a)->prev == NULL || *stack_b == NULL || (*stack_b)->prev == NULL)
 		return ;
 	rra(stack_a, 1);
-	rrb(stack_a, 1);
+	rrb(stack_b, 1);
 	write(1, "rrr\n", 4);
 }

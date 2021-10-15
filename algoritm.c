@@ -6,17 +6,16 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/14 21:14:05 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/15 18:51:53 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order);
-static void less_six (t_list **stack_a, t_list **stack_b, t_data *data);
+//static void less_six (t_list **stack_a, t_list **stack_b, t_data *data);
 static void	clear_last_el_in_b(t_list **stack_b);
 static t_list *find_last(t_list **stack_a);
-//static int	put_in_a_again(t_list **stack_a, t_list **stack_b, t_data *data, int max);
 
 void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 {
@@ -63,8 +62,6 @@ int	find_max_order(t_list **stack)
 	max_order++;
 	return (max_order);
 }
-
-
 
 static void	put_in_b(t_list **stack_a, t_list **stack_b, int mid_order)
 {
@@ -163,7 +160,7 @@ static t_list *find_last(t_list **stack_a)
 	return (last);
 }
 
-static void less_six (t_list **stack_a, t_list **stack_b, t_data *data)
+void less_six (t_list **stack_a, t_list **stack_b, t_data *data)
 {
 	void (*funcs_1) (t_list **stack_a);
 	void (*funcs_2) (t_list **stack_a, t_list **stack_b);
@@ -193,103 +190,3 @@ static void less_six (t_list **stack_a, t_list **stack_b, t_data *data)
 		return ;
 	}
 }
-
-//static int	put_in_a_again(t_list **stack_a, t_list **stack_b, t_data *data, int max)
-//{
-//	t_list	*first;
-//	t_list	*last;
-//	int		count_for_first;
-//	int		count_for_last;
-//	int		mid_order;
-//	int		res;
-//	t_list	*iterator;
-//
-//	mid_order = (max - data->next) / 2 + data->next;
-////	res = max - mid_order - 1;
-//	count_for_first = 1;
-//	count_for_last = 2;
-//	first = *stack_b;
-//	last = find_last(stack_b);
-//	iterator = *stack_b;
-//	while (first && last && !(first == last && first->order < mid_order) && !(first->next == last))
-//	{
-//		if (first->order >= mid_order && first == *stack_b)
-//		{
-//			pa(stack_a, stack_b);
-//			if ((*stack_a)->order == data->next)
-//			{
-//				ra(stack_a, 0);
-//				data->next++;
-//			}
-//			first = *stack_b;
-//			count_for_first = 1;
-//			last = find_last(stack_b);
-//			count_for_last = 2;
-//		}
-//		else if (last->order >= mid_order && last == find_last(stack_b))
-//		{
-//			last = last->next;
-//			count_for_last = 2;
-//			rrb(stack_b, 0);
-//			pa(stack_a, stack_b);
-//			if ((*stack_a)->order == data->next)
-//			{
-//				ra(stack_a, 0);
-//				data->next++;
-//			}
-//			first = *stack_b;
-//			count_for_first = 1;
-//		}
-//		else
-//		{
-//			first = first->prev;
-//			count_for_first++;
-//			if (first && first->order >= mid_order && count_for_first <= count_for_last)
-//			{
-//				while (count_for_first != 1)
-//				{
-//					if (count_for_first == 2)
-//						sb(stack_b, 0);
-//					else if (count_for_first != 2 || (count_for_first == 2 && first->prev && first->prev->prev && first->prev->prev->order <= mid_order))
-//					{
-//						rb(stack_b, 0);
-//						last = last->prev;
-//						count_for_last = 2;
-//					}
-//					count_for_first--;
-//				}
-//				pa(stack_a, stack_b);
-//				if ((*stack_a)->order == data->next)
-//				{
-//					ra(stack_a, 0);
-//					data->next++;
-//				}
-//				first = *stack_b;
-//				count_for_first = 1;
-//				continue ;
-//			}
-//			last = last->next;
-//			count_for_last++;
-//			if (last && last->order >= mid_order && count_for_last <= count_for_first)
-//			{
-//				while (count_for_last != 1)
-//				{
-//					rrb(stack_b, 0);
-//					count_for_last--;
-//				}
-//				pa(stack_a, stack_b);
-//				if ((*stack_a)->order == data->next)
-//				{
-//					ra(stack_a, 0);
-//					data->next++;
-//				}
-//				first = *stack_b;
-//				last = last->next;
-//				count_for_first = 1;
-//				count_for_last = 2;
-//			}
-//		}
-//	}
-//	res = find_max_order(stack_b);
-//	return (res);
-//}

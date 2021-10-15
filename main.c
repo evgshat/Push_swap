@@ -10,7 +10,7 @@ int	main(int argc, char **argv)
 		return (0);
 	else if (data.res == 2)
 	{
-		printf("%s", "already sort!");
+		printf("already sort!\n");
 		return (0);
 	}
 	data.massiv = create_massiv(argc, argv);
@@ -19,6 +19,6 @@ int	main(int argc, char **argv)
 	data.argc = argc;
 	data.stack_b = init_list("0");
 	algoritm(&data.stack_a, &data.stack_b, &data);
-//	test(&data.stack_a, &data.stack_b);
+	test(&data.stack_a, &data.stack_b);
 	return (0);
 }

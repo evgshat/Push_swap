@@ -30,4 +30,3 @@ t_list	*addelem(t_list **stack, char *new_chislo)
 		p->prev = temp;
 	return (temp);
 }
-
