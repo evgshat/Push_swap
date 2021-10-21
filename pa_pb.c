@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   pa_pb.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/20 00:13:23 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	pa_two(t_list **stack_a, t_list	*buf);
+static void	pb_two(t_list **stack_b, t_list	*buf);
 
 void	pa(t_list **stack_a, t_list **stack_b)
 {
@@ -30,15 +33,7 @@ void	pa(t_list **stack_a, t_list **stack_b)
 		(*stack_a)->prev = NULL;
 	}
 	else
-	{
-		(*stack_a)->next = malloc(sizeof(t_list));
-		(*stack_a)->next->chislo = buf->chislo;
-		(*stack_a)->next->flag = buf->flag;
-		(*stack_a)->next->order = buf->order;
-		(*stack_a)->next->next = NULL;
-		(*stack_a)->next->prev = *stack_a;
-		*stack_a = (*stack_a)->next;
-	}
+		pa_two(stack_a, buf);
 	free (buf);
 	write(1, "pa\n", 3);
 }
@@ -60,44 +55,29 @@ void	pb(t_list **stack_a, t_list **stack_b)
 		(*stack_b)->prev = NULL;
 	}
 	else
-	{
-		(*stack_b)->next = malloc(sizeof(t_list));
-		(*stack_b)->next->chislo = buf->chislo;
-		(*stack_b)->next->flag = buf->flag;
-		(*stack_b)->next->order = buf->order;
-		(*stack_b)->next->next = NULL;
-		(*stack_b)->next->prev = *stack_b;
-		*stack_b = (*stack_b)->next;
-	}
+		pb_two(stack_b, buf);
 	free (buf);
 	write(1, "pb\n", 3);
 }
 
-// void	pa(t_list **stack_a, t_list **stack_b)
-// {
-// 	t_list	*buf;
+static void	pa_two(t_list **stack_a, t_list	*buf)
+{
+	(*stack_a)->next = malloc(sizeof(t_list));
+	(*stack_a)->next->chislo = buf->chislo;
+	(*stack_a)->next->flag = buf->flag;
+	(*stack_a)->next->order = buf->order;
+	(*stack_a)->next->next = NULL;
+	(*stack_a)->next->prev = *stack_a;
+	*stack_a = (*stack_a)->next;
+}
 
-// 	buf = *stack_b;
-// 	*stack_b = (*stack_b)->prev;
-// 	(*stack_a)->next = malloc(sizeof(t_list));
-// 	(*stack_a)->next->chislo = buf->chislo;
-// 	(*stack_a)->next->order = buf->order;
-// 	(*stack_a)->next->flag = buf->flag;
-// 	(*stack_a)->next->next = NULL;
-// 	(*stack_a)->next->prev = *stack_a;
-// 	*stack_a = (*stack_a)->next;
-// 	free (buf);
-// 	write(1, "pa\n", 3);
-// }
-
-// void	pa(t_list **stack_a, t_list **stack_b)
-// {
-// 	t_list	*buf;
-
-// 	buf = *stack_b;
-// 	*stack_b = (*stack_b)->prev;
-// 	// (*stack_b)->next = NULL;
-// 	addelem_num(stack_a, buf->chislo, buf->order, buf->flag);
-// 	free (buf);
-// 	write(1, "pa\n", 3);
-// }
+static void	pb_two(t_list **stack_b, t_list	*buf)
+{
+	(*stack_b)->next = malloc(sizeof(t_list));
+	(*stack_b)->next->chislo = buf->chislo;
+	(*stack_b)->next->flag = buf->flag;
+	(*stack_b)->next->order = buf->order;
+	(*stack_b)->next->next = NULL;
+	(*stack_b)->next->prev = *stack_b;
+	*stack_b = (*stack_b)->next;
+}

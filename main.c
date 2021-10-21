@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/20 00:12:52 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	main(int argc, char **argv)
 	data.stack_a = create_list(argc, argv, data.massiv);
 	data.next = 1;
 	data.argc = argc;
-	data.stack_b = init_list("0");
+	data.stack_b = NULL;
 	algoritm(&data.stack_a, &data.stack_b, &data);
-//	test(&data.stack_a, &data.stack_b);
 	return (0);
 }

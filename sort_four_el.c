@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   sort_four_el.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/19 23:56:23 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static void	convert_stack(t_list	**stack_a, t_stack_els	*els);
 static int	find_min(t_list	**stack_a);
+static	void	sort_four_el_else(t_list **stack_a,
+				t_list **stack_b, int min, int i);
 
 void	sort_four_el(t_list	**stack_a, t_list	**stack_b)
 {
 	t_stack_els	els;
 	int			min;
 	int			i;
-	t_list		*iterator;
 
+	min = find_min(stack_a);
+	i = 0;
 	convert_stack(stack_a, &els);
 	if (!(els.a < els.b && els.c < els.d && els.b < els.c))
 	{
@@ -32,32 +35,33 @@ void	sort_four_el(t_list	**stack_a, t_list	**stack_b)
 		else if (els.d < els.a && els.a < els.b && els.b < els.c)
 			rra(stack_a, 0);
 		else
-		{
-			min = find_min(stack_a);
-			i = 0;
-			iterator = *stack_a;
-			while (iterator->chislo != min)
-			{
-				i++;
-				iterator = iterator->prev;
-			}
-			if (i == 3)
-				rra(stack_a, 0);
-			else if (i == 2)
-			{
-				rra(stack_a, 0);
-				rra(stack_a, 0);
-			}
-			else if (i == 1)
-				sa(stack_a, 0);
-			pb(stack_a, stack_b);
-			sort_three_el(stack_a, stack_b);
-			pa(stack_a, stack_b);
-		}
-
+			sort_four_el_else(stack_a, stack_b, min, i);
 	}
 }
 
+static	void	sort_four_el_else(t_list **stack_a,
+			t_list **stack_b, int min, int i)
+{
+	t_list		*iterator;
+
+	iterator = *stack_a;
+	while (iterator->chislo != min)
+	{
+		i++;
+		iterator = iterator->prev;
+	}
+	if (i == 3 || i == 2)
+	{
+		if (i == 2)
+			rra(stack_a, 0);
+		rra(stack_a, 0);
+	}
+	else if (i == 1)
+		sa(stack_a, 0);
+	pb(stack_a, stack_b);
+	sort_three_el(stack_a, stack_b);
+	pa(stack_a, stack_b);
+}
 
 static void	convert_stack(t_list	**stack_a, t_stack_els	*els)
 {

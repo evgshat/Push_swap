@@ -3,7 +3,6 @@ SRCS = addelem.c \
 		is_norm_args.c \
 		main.c \
 		sa_sb_ss.c \
-		utils.c \
 		create_list.c \
 		pa_pb.c \
 		ra_rb_rr.c \
@@ -14,14 +13,14 @@ SRCS = addelem.c \
 		sort_five_el.c \
 		create_massiv.c \
 		algoritm.c \
-		test.c \
 		put_in_a.c \
 		back_to_b.c \
 		sort_second_half.c \
 		put_in_b.c \
 		utils_for_put_a_b.c \
 		utils_for_put_a_b_2.c \
-		utils_for_put_a_b_3.c \
+		check_double.c \
+		check_next_element.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -1,53 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   put_in_b.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/19 23:59:23 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	clear_last_el_in_b(t_list **stack_b);
+static void	pib_else(t_list **stack_a,
+				t_list **stack_b, t_data *data, int *qnty_push);
 
 void	put_in_b(t_list **stack_a, t_list **stack_b, t_data *data)
 {
-	t_pta *ptb = NULL;
+	int	qnty_push;
 
-	ptb = init_pta(stack_b, ptb);
-	while (ptb->first && ptb->last && !(ptb->first == ptb->last && ptb->first->order > data->mid_order)
-		   && ptb->first->next != ptb->last)
+	qnty_push = 0;
+	while (qnty_push < data->mid_order - data->next + 1)
 	{
-		if (ptb->first->order <= data->mid_order && ptb->first == *stack_a)
-			first_last_ptb(stack_a, stack_b, ptb, 1);
-		else if (ptb->last->order <= data->mid_order && ptb->last == find_last(stack_a))
-			first_last_ptb(stack_a, stack_b, ptb, 2);
+		if ((*stack_a)->order <= data->mid_order
+			&& (*stack_a)->order > data->next - 1)
+		{
+			pb(stack_a, stack_b);
+			qnty_push++;
+		}
+		else if (find_last(stack_a)->order <= data->mid_order
+			&& find_last(stack_a)->order > data->next - 1)
+			pib_else(stack_a, stack_b, data, &qnty_push);
 		else
 		{
-			move_next_ptb(ptb, data);
-			if (ptb->first && ptb->first->order <= data->mid_order
-				&& ptb->count_for_first <= ptb->count_for_last)
-			{
-				first_last_prev_ptb(stack_a, stack_b, ptb, 1);
-				continue ;
-			}
-			if (ptb->last && ptb->last->order <= data->mid_order
-				&& ptb->count_for_last <= ptb->count_for_first)
-				first_last_prev_ptb(stack_a, stack_b, ptb, 2);
+			if (*stack_b && (*stack_b)->order < data->next)
+				rr(stack_a, stack_b);
+			else
+				ra(stack_a, 0);
 		}
 	}
-	clear_last_el_in_b(stack_b);
 }
 
-static void	clear_last_el_in_b(t_list **stack_b)
+static void	pib_else(t_list **stack_a,
+			t_list **stack_b, t_data *data, int *qnty_push)
 {
-	while ((*stack_b)->prev != NULL)
-		*stack_b = (*stack_b)->prev;
-	(*stack_b)->next->prev = NULL;
-	while ((*stack_b)->next != NULL)
-		*stack_b = (*stack_b)->next;
+	if (*stack_b && (*stack_b)->order < data->next)
+		rrr(stack_a, stack_b);
+	else
+		rra(stack_a, 0);
+	pb(stack_a, stack_b);
+	*qnty_push = *qnty_push + 1;
 }

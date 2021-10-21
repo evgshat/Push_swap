@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   create_massiv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/19 23:54:13 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	*sort_massiv(int *massiv, int argc);
 static void	obmen(int *m_first, int *m_second, int *massiv);
+static void	sort_massiv_two(int *massiv, int *argc, int *flag);
 
 int	*create_massiv(int argc, char **argv)
 {
@@ -38,24 +39,31 @@ int	*create_massiv(int argc, char **argv)
 
 static int	*sort_massiv(int *massiv, int argc)
 {
-	int	m_first;
-	int	m_second;
 	int	flag;
 
 	if (argc < 3)
 		return (massiv);
 	flag = 1;
-	while (flag == 1)
+	sort_massiv_two(massiv, &argc, &flag);
+	return (massiv);
+}
+
+static void	sort_massiv_two(int *massiv, int *argc, int *flag)
+{
+	int	m_first;
+	int	m_second;
+
+	while (*flag == 1)
 	{
-		flag = 0;
+		*flag = 0;
 		m_first = 0;
 		m_second = 1;
-		while (m_second < (argc - 1))
+		while (m_second < (*argc - 1))
 		{
 			if (massiv[m_first] < massiv[m_second])
 			{
 				obmen(&m_first, &m_second, massiv);
-				flag = 1;
+				*flag = 1;
 			}
 			else
 			{
@@ -64,7 +72,6 @@ static int	*sort_massiv(int *massiv, int argc)
 			}
 		}
 	}
-	return (massiv);
 }
 
 static void	obmen(int *m_first, int *m_second, int *massiv)
