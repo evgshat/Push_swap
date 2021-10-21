@@ -1,182 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algoritm.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
+/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static t_list *find_last(t_list **stack_b);
-static int	find_max_order_again(t_list **stack);
+static int	qnty_els_is_stack(t_list **stack);
+static int one_two_free_els_to_a(t_list **stack_a, t_list **stack_b, t_data *data);
 
 int	put_in_a(t_list **stack_a, t_list **stack_b, t_data *data, int max)
 {
-	t_list	*first;
-	t_list	*last;
-	int		count_for_first;
-	int		count_for_last;
 	int		mid_order;
-	int		res;
+	t_pta *pta = NULL;
 	t_list	*iterator;
 
+	pta = init_pta(stack_b, pta);
 	mid_order = (max - data->next) / 2 + data->next;
-//	res = max - mid_order - 1;
 	data->flag++;
-	count_for_first = 1;
-	count_for_last = 2;
-	first = *stack_b;
-	last = find_last(stack_b);
 	iterator = *stack_b;
-	while (iterator != NULL)
+	paste_flags(iterator, data);
+	while (pta->first && pta->last && !(pta->first == pta->last
+			&& pta->first->order < mid_order) && !(pta->first->next == pta->last))
 	{
-		iterator->flag = data->flag;
-		iterator = iterator->prev;
-	}
-
-	while (first && last && !(first == last && first->order < mid_order) && !(first->next == last))
-	{
-		if (first->order >= mid_order && first == *stack_b)
-		{
-			pa(stack_a, stack_b);
-			if ((*stack_a)->order == data->next)
-			{
-				ra(stack_a, 0);
-				data->next++;
-			}
-			first = *stack_b;
-			count_for_first = 1;
-			last = find_last(stack_b);
-			count_for_last = 2;
-		}
-		else if (last->order >= mid_order && last == find_last(stack_b))
-		{
-			last = last->next;
-			count_for_last = 2;
-			rrb(stack_b, 0);
-			pa(stack_a, stack_b);
-			if ((*stack_a)->order == data->next)
-			{
-				ra(stack_a, 0);
-				data->next++;
-			}
-			first = *stack_b;
-			count_for_first = 1;
-		}
+		if (qnty_els_is_stack(stack_b) < 4)
+			return (one_two_free_els_to_a(stack_a, stack_b, data));
+		if (pta->first->order >= mid_order && pta->first == *stack_b)
+			first_last_pta(stack_a, stack_b, data, pta, 1);
+		else if (pta->last->order >= mid_order && pta->last == find_last(stack_b))
+			first_last_pta(stack_a, stack_b, data, pta, 2);
 		else
 		{
-			first = first->prev;
-			count_for_first++;
-			if (first && first->order >= mid_order && count_for_first <= count_for_last)
+			move_next_pta(pta, mid_order);
+			if (pta->first && pta->first->order >= mid_order
+					&& pta->count_for_first <= pta->count_for_last)
 			{
-				while (count_for_first != 1)
-				{
-					if (count_for_first == 2 && (count_for_first == 2 && first->prev && first->prev->prev && first->prev->prev->order > mid_order))
-						sb(stack_b, 0);
-					else if (count_for_first != 2 || (count_for_first == 2 && first->prev && first->prev->prev && first->prev->prev->order <= mid_order))
-					{
-						rb(stack_b, 0);
-						last = last->prev;
-						count_for_last = 2;
-					}
-					count_for_first--;
-				}
-				pa(stack_a, stack_b);
-				if ((*stack_a)->order == data->next)
-				{
-					ra(stack_a, 0);
-					data->next++;
-				}
-				first = *stack_b;
-				count_for_first = 1;
+				first_last_prev_pta(stack_a, stack_b, data, pta, 1);
 				continue ;
 			}
-			last = last->next;
-			count_for_last++;
-			if (last && last->order >= mid_order && count_for_last <= count_for_first)
-			{
-				while (count_for_last != 1)
-				{
-					rrb(stack_b, 0);
-					count_for_last--;
-				}
-				pa(stack_a, stack_b);
-				if ((*stack_a)->order == data->next)
-				{
-					ra(stack_a, 0);
-					data->next++;
-				}
-				first = *stack_b;
-				last = last->next;
-				count_for_first = 1;
-				count_for_last = 2;
-			}
+			if (pta->last && pta->last->order >= mid_order
+					&& pta->count_for_last <= pta->count_for_first)
+				first_last_prev_pta(stack_a, stack_b, data, pta, 2);
 		}
 	}
-	res = find_max_order_again(stack_b);
-	return (res);
+	return (find_max_order_again(stack_b));
 }
 
-static int	find_max_order_again(t_list **stack)
+static int one_two_free_els_to_a(t_list **stack_a, t_list **stack_b, t_data *data)
 {
-	int		max_order;
-	t_list	*p;
+	int	qnty_els_b;
 
-	if (*stack == NULL)
-		return (0);
-	p = *stack;
-	max_order = p->order;
-	while (p != NULL)
+	qnty_els_b = qnty_els_is_stack(stack_b);
+	if (qnty_els_b == 1)
+		pa(stack_a, stack_b);
+	else if (qnty_els_b == 2)
 	{
-		if (p->order > max_order)
-			max_order = p->order;
-		p = p->prev;
+		if ((*stack_b)->order < (*stack_b)->prev->order)
+			sb(stack_b, 0);
+		pa(stack_a, stack_b);
+		pa(stack_a, stack_b);
 	}
-	return (max_order);
+	else if (qnty_els_b == 3)
+	{
+		if ((*stack_b)->prev->order > (*stack_b)->order
+			&& (*stack_b)->prev->order > (*stack_b)->prev->prev->order)
+		{
+			sb(stack_b, 0);
+		}
+		else if (((*stack_b)->prev->prev->order > (*stack_b)->prev->order
+			&& (*stack_b)->prev->prev->order < (*stack_b)->order)
+			|| ((*stack_b)->prev->prev->order < (*stack_b)->prev->order
+				&& (*stack_b)->prev->prev->order > (*stack_b)->order))
+		{
+			if ((*stack_b)->prev->prev->order > (*stack_b)->prev->order
+				&& (*stack_b)->prev->prev->order < (*stack_b)->order)
+				sb(stack_b, 0);
+			rb(stack_b, 0);
+		}
+		else if (((*stack_b)->prev->prev->order > (*stack_b)->prev->order
+			&& (*stack_b)->prev->prev->order > (*stack_b)->order))
+		{
+			if ((*stack_b)->order < (*stack_b)->prev->order)
+				sb(stack_b, 0);
+			rb(stack_b, 0);
+		}
+		pa(stack_a, stack_b);
+		pa(stack_a, stack_b);
+		pa(stack_a, stack_b);
+	}
+	top_down(stack_a, data);
+	return (0);
 }
 
-static t_list *find_last(t_list **stack_b)
+static int	qnty_els_is_stack(t_list **stack)
 {
-	t_list	*last;
+	int	qnty;
+	t_list	*iterator;
 
-	last = *stack_b;
-	if (!last)
-		return NULL;
-	while (last->prev != NULL)
-		last = last->prev;
-	return (last);
+	qnty = 0;
+	iterator = *stack;
+	while (iterator != NULL)
+	{
+		qnty++;
+		iterator = iterator->prev;
+	}
+	return (qnty);
 }
-
-// int	algoritm_path_two(t_list **stack_a, t_list **stack_b, t_data *data, int max)
-// {
-// 	int		mid_order;
-// 	t_list	*p;
-// 	t_list	*iterator;
-// 	int		i;
-// 	int		res;
-
-// 	mid_order = (max - data->next) / 2 + data->next;
-// 	res = max - mid_order - 1;
-// 	data->flag++;
-// 	while (max >= mid_order)
-// 	{
-// 		p = *stack_b;
-// 		while(p->order != mid_order)
-// 			p = p->prev;
-// 		if (p->order == mid_order)
-// 		{
-// 			i = 1;
-// 			iterator = *stack_b;
-// 			while (iterator->order != mid_order)
-// 			{
-// 				i++;
-// 				iterator = iterator->prev;
-// 			}
-// 			if (i >= mid_order)
-// 				shift_rra(stack_b, max, i);
-// 			else
-// 				shift_ra(stack_b, i);
-// 			pa(stack_a, stack_b);
-// 			if (iterator->order == data->next)
-// 			{
-// 				ra(stack_a, 0);
-// 				data->next++;
-// 			}
-// 		}
-// 		mid_order++;
-// 	}
-// 	return (res);
-// }

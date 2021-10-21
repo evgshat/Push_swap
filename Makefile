@@ -8,7 +8,6 @@ SRCS = addelem.c \
 		pa_pb.c \
 		ra_rb_rr.c \
 		sort_two_el.c \
-		ft_strdup.c \
 		sort_three_el.c \
 		rra_rrb_rrr.c \
 		sort_four_el.c \
@@ -19,7 +18,10 @@ SRCS = addelem.c \
 		put_in_a.c \
 		back_to_b.c \
 		sort_second_half.c \
-		top_down.c
+		put_in_b.c \
+		utils_for_put_a_b.c \
+		utils_for_put_a_b_2.c \
+		utils_for_put_a_b_3.c \
 
 OBJS = $(SRCS:.c=.o)
 

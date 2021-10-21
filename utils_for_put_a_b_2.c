@@ -10,27 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void move_next_pta(t_pta *pta, int mid_order)
 {
-	t_data	data;
-
-	data.flag = 0;
-	data.res = is_norm_args(argc, argv);
-	if (data.res < 0)
-		return (0);
-	else if (data.res == 2)
+	while (pta->first && !(pta->first->order >= mid_order))
 	{
-		printf("already sort!\n");
-		return (0);
+		pta->first = pta->first->prev;
+		pta->count_for_first++;
 	}
-	data.massiv = create_massiv(argc, argv);
-	data.stack_a = create_list(argc, argv, data.massiv);
-	data.next = 1;
-	data.argc = argc;
-	data.stack_b = init_list("0");
-	algoritm(&data.stack_a, &data.stack_b, &data);
-//	test(&data.stack_a, &data.stack_b);
-	return (0);
+	while (pta->last && !(pta->last->order >= mid_order))
+	{
+		pta->last = pta->last->next;
+		pta->count_for_last++;
+	}
+}
+
+int	find_max_order_again(t_list **stack)
+{
+	int		max_order;
+	t_list	*p;
+
+	if (*stack == NULL)
+		return (0);
+	p = *stack;
+	max_order = p->order;
+	while (p != NULL)
+	{
+		if (p->order > max_order)
+			max_order = p->order;
+		p = p->prev;
+	}
+	return (max_order);
+}
+
+t_list *find_last(t_list **stack_b)
+{
+	t_list	*last;
+
+	last = *stack_b;
+	if (!last)
+		return NULL;
+	while (last->prev != NULL)
+		last = last->prev;
+	return (last);
 }

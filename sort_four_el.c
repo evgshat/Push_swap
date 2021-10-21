@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algoritm.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
+/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	convert_stack(t_list	**stack_a, t_stack_els	*els);
@@ -39,7 +51,7 @@ void	sort_four_el(t_list	**stack_a, t_list	**stack_b)
 			else if (i == 1)
 				sa(stack_a, 0);
 			pb(stack_a, stack_b);
-			sort_three_el(stack_a);
+			sort_three_el(stack_a, stack_b);
 			pa(stack_a, stack_b);
 		}
 

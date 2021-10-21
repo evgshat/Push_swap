@@ -6,15 +6,14 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 21:06:12 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/15 20:43:39 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/16 16:20:04 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min);
-static t_list *find_last(t_list **stack_b);
-static int	find_max_order_again(t_list **stack);
+static void better_for_b(t_list **stack_a, t_list **stack_b, t_data *data);
 
 void	sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min)
 {
@@ -22,9 +21,11 @@ void	sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max,
 	t_list *last_a;
 	int mid;
 
-//	while ((*stack_a)->order != 1)
-//	{
+	while ((*stack_a)->order != 1)
+	{
+		top_down(stack_a, data);
 		max_for_b = put_in_b_again(stack_a, stack_b, data, max, min);
+//		better_for_b(stack_a, stack_b, data);
 		mid = max_for_b;
 		last_a = find_last(stack_a);
 		while (last_a->order > min && data->next < max)
@@ -35,49 +36,27 @@ void	sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max,
 				rra(stack_a, 0);
 			last_a = find_last(stack_a);
 		}
-		while ((*stack_b) && (*stack_b)->order == data->next)
-		{
-			pa(stack_a, stack_b);
-			ra(stack_a, 0);
-			data->next++;
-	//			continue;
-		}
+		better_for_b(stack_a, stack_b, data);
+		top_down(stack_a, data);
 		while (max_for_b > 0 && data->next < max)
 		{
+			better_for_b(stack_a, stack_b, data);
 			max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
 			top_down(stack_a, data);
 		}
 		while ((*stack_a)->order <= mid && (*stack_a)->order >= data->next
 			   && data->next < max)
 		{
-			max_for_b = back_to_b(stack_a, stack_b);
+			max_for_b = back_to_b(stack_a, stack_b, data);
 			while (max_for_b > 0)
 			{
+				better_for_b(stack_a, stack_b, data);
 				max_for_b = put_in_a(stack_a, stack_b, data, max_for_b);
 				top_down(stack_a, data);
 			}
 		}
-//		min = data->next - 1;
-
-//	}
-}
-
-static int	find_max_order_again(t_list **stack)
-{
-	int		max_order;
-	t_list	*p;
-
-	p = *stack;
-	if (*stack == NULL)
-		return (0);
-	max_order = p->order;
-	while (p != NULL)
-	{
-		if (p->order > max_order)
-			max_order = p->order;
-		p = p->prev;
+		min = data->next - 1;
 	}
-	return (max_order);
 }
 
 static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min)
@@ -91,7 +70,6 @@ static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int 
 	t_list	*iterator;
 
 	mid_order = (max - data->next) / 2 + data->next;
-//	res = max - mid_order - 1;
 	data->flag++;
 	count_for_first = 1;
 	count_for_last = 2;
@@ -103,15 +81,8 @@ static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int 
 		iterator->flag = data->flag;
 		iterator = iterator->prev;
 	}
-	// если наверху в а есть дата-некст, то сразу вниз
-//	while ((*stack_a)->order == data->next)
-//	{
-//		if ((*stack_a)->order == data->next)
-//			ra(stack_a, 0);
-//		data->next++;
-//	}
-
-	while (first && last && !(first == last && first->order > mid_order) && !(first->next == last))
+	while (first && last && !(first == last && first->order > mid_order)
+		&& !(first->next == last))
 	{
 		if (first->order <= mid_order && first->order > min && first == *stack_a)
 		{
@@ -123,39 +94,52 @@ static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int 
 		}
 		else if (last->order <= mid_order && last->order > min && last == find_last(stack_a))
 		{
-			last = last->next;
-			count_for_last = 2;
 			rra(stack_a, 0);
 			pb(stack_a, stack_b);
 			first = *stack_a;
 			count_for_first = 1;
+			last = find_last(stack_a);
+			count_for_last = 2;
 		}
 		else
 		{
-			first = first->prev;
-			count_for_first++;
-			if (first && first->order <= mid_order && first->order > min && count_for_first <= count_for_last)
+			while (first)
+			{
+				if (first->order <= mid_order && first->order > min)
+					break ;
+				first = first->prev;
+				count_for_first++;
+			}
+			while (last)
+			{
+				if (last->order <= mid_order && last->order > min )
+					break ;
+				last = last->next;
+				count_for_last++;
+			}
+			if (first && first->order <= mid_order
+				&& first->order > min
+					&& count_for_first <= count_for_last)
 			{
 				while (count_for_first != 1)
 				{
-					if (count_for_first == 2 && (count_for_first == 2 && first->prev && first->prev->prev && first->prev->prev->order > mid_order))
-						sa(stack_a, 0);
-					else if (count_for_first != 2 || (count_for_first == 2 && first->prev && first->prev->prev && first->prev->prev->order <= mid_order))
-					{
+					if ((*stack_b) && (*stack_b)->prev != NULL && (*stack_b)->next
+						!= NULL && (*stack_b)->order != data->mid_order)
+						rr(stack_a, stack_b);
+					else
 						ra(stack_a, 0);
-						last = last->prev;
-						count_for_last = 2;
-					}
 					count_for_first--;
 				}
 				pb(stack_a, stack_b);
 				first = *stack_a;
 				count_for_first = 1;
+				last = find_last(stack_a);;
+				count_for_last = 2;
 				continue ;
 			}
-			last = last->next;
-			count_for_last++;
-			if (last && last->order <= mid_order && last->order > min && count_for_last <= count_for_first)
+			if (last && last->order <= mid_order
+				&& last->order > min
+					&& count_for_last <= count_for_first)
 			{
 				while (count_for_last != 1)
 				{
@@ -164,7 +148,7 @@ static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int 
 				}
 				pb(stack_a, stack_b);
 				first = *stack_a;
-				last = last->next;
+				last = find_last(stack_a);
 				count_for_first = 1;
 				count_for_last = 2;
 			}
@@ -174,15 +158,22 @@ static int	put_in_b_again(t_list **stack_a, t_list **stack_b, t_data *data, int 
 	return (res);
 }
 
-static t_list *find_last(t_list **stack)
+static void better_for_b(t_list **stack_a, t_list **stack_b, t_data *data)
 {
-	t_list	*last;
-
-	last = *stack;
-	if (!last)
-		return NULL;
-	while (last->prev != NULL)
-		last = last->prev;
-	return (last);
+	while (((*stack_b) && (*stack_b)->order == data->next)
+		   || ((*stack_b) && find_last(stack_b)->order == data->next)
+		   || ((*stack_b) && (*stack_b)->prev
+			   && (*stack_b)->prev->order == data->next))
+	{
+		if ((*stack_b) && *stack_b != find_last(stack_b)
+			&& find_last(stack_b)->order == data->next)
+			rrb(stack_b, 0);
+		else if ((*stack_b) && (*stack_b)->prev
+				 && (*stack_b)->prev->order == data->next)
+			sb(stack_b, 0);
+		pa(stack_a, stack_b);
+		ra(stack_a, 0);
+		data->next++;
+	}
 }
 

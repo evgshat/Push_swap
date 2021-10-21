@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algoritm.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
+/*   Updated: 2021/10/16 20:07:34 by lcharlet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	sort_two_el(t_list	**stack)
+void	sort_two_el(t_list	**stack_a, t_list	**stack_b)
 {
-	if ((*stack)->chislo > (*stack)->prev->chislo)
+	(void)stack_b;
+	if ((*stack_a)->chislo > (*stack_a)->prev->chislo)
 	{
-		sa(stack, 0);
+		sa(stack_a, 0);
 	}
 }
 

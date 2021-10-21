@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/15 19:00:11 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/16 19:54:01 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ typedef struct s_list
 	int				flag;
 }	t_list;
 
+typedef struct s_pta
+{
+	int	count_for_first;
+	int	count_for_last;
+	t_list	*last;
+	t_list	*first;
+}	t_pta;
+
 typedef struct s_stack_els
 {
 	int	a;
@@ -44,6 +52,8 @@ typedef struct s_data
 	int		flag;
 	int		next;
 	int		argc;
+	int		mid_order;
+	int		max_order;
 }	t_data;
 
 // massiv_and_list
@@ -75,8 +85,8 @@ void		rrr(t_list **stack_a, t_list **stack_b);
 void test(t_list **stack_a, t_list **stack_b);
 
 // sort
-void		sort_two_el(t_list	**stack);
-void		sort_three_el(t_list	**stack);
+void		sort_two_el(t_list	**stack_a, t_list	**stack_b);
+void		sort_three_el(t_list	**stack_a, t_list	**stack_b);
 void		sort_four_el(t_list	**stack_a, t_list	**stack_b);
 void		sort_five_el(t_list	**stack_a, t_list	**stack_b);
 
@@ -84,10 +94,26 @@ void		sort_five_el(t_list	**stack_a, t_list	**stack_b);
 void		algoritm(t_list **stack_a, t_list **stack_b, t_data *data);
 void		alg_brazh(t_list **stack_a, int argc);
 int			put_in_a(t_list **stack_a, t_list **stack_b, t_data *data, int max);
-int			back_to_b(t_list **stack_a, t_list **stack_b);
+int			back_to_b(t_list **stack_a, t_list **stack_b, t_data *data);
 int			find_max_order(t_list **stack_a);
 void		sort_second_half(t_list **stack_a, t_list **stack_b, t_data *data, int max, int min);
 void 		top_down(t_list **stack_a, t_data *data);
-void less_six (t_list **stack_a, t_list **stack_b, t_data *data);
+void 		less_six (t_list **stack_a, t_list **stack_b, t_data *data);
+void		put_in_b(t_list **stack_a, t_list **stack_b, t_data *data);
 
+//utils functions
+// pta
+t_pta 	*init_pta(t_list **stack_b, t_pta *pta);
+void 	first_last_pta(t_list **stack_a, t_list **stack_b, t_data *data, t_pta *pta, int i);
+void	first_last_prev_pta(t_list **stack_a, t_list **stack_b, t_data *data, t_pta *pta, int i);
+void	paste_flags(t_list *iterator, t_data *data);
+//
+void 	move_next_pta(t_pta *pta, int mid_order);
+int		find_max_order_again(t_list **stack);
+t_list 	*find_last(t_list **stack_b);
+
+//ptb
+void 	first_last_ptb(t_list **stack_a, t_list **stack_b, t_pta *pta, int i);
+void	move_next_ptb(t_pta *ptb, t_data *data);
+void	first_last_prev_ptb(t_list **stack_a, t_list **stack_b, t_pta *ptb, int i);
 #endif
