@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/20 00:23:30 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/21 22:55:40 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,20 @@ typedef struct s_pia
 	int		mid;
 	int		qnty_push;
 }	t_pia;
+
+typedef struct s_check
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		*massiv;
+	int		res;
+	int		argc;
+	char	*str;
+	int		i;
+	int		j;
+	int		j_str;
+}	t_check;
+
 
 // massiv_and_list
 t_list		*create_list(int argc, char **argv, int *massiv);
