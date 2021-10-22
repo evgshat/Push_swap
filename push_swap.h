@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/21 22:55:40 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 21:41:56 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct s_check
 	int		j;
 	int		j_str;
 }	t_check;
-
 
 // massiv_and_list
 t_list		*create_list(int argc, char **argv, int *massiv);
