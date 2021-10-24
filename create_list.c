@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcharlet <lcharlet@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/17 22:14:21 by hcharlsi         ###   ########.fr       */
+/*   Updated: 2021/10/24 15:27:15 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ static void	paste_order(t_list **stack, int	*massiv, int argc)
 			m++;
 		}
 	}
+	free (massiv);
 }

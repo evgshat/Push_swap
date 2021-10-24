@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/19 23:52:20 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/24 14:50:14 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 {
-	t_list	*temp;
-
 	if (data->argc < 7)
 	{
 		less_six(stack_a, stack_b, data);
@@ -31,12 +29,6 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 		back_to_b(stack_a, stack_b, data);
 	}
 	sort_second_half(stack_a, stack_b, data);
-	while ((*stack_a) != NULL)
-	{
-		temp = (*stack_a);
-		*stack_a = temp->prev;
-		free(temp);
-	}
 }
 
 int	find_max_order(t_list **stack)
