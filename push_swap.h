@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/22 21:41:56 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:53:55 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_check
 t_list		*create_list(int argc, char **argv, int *massiv);
 int			*create_massiv(int argc, char **argv);
 int			is_norm_args(int argc, char **argv);
-int			ft_atoi(const char *string);
+long		ft_atoi(const char *string);
 char		*ft_strdup(const char *str);
 t_list		*init_list(char *str);
 t_list		*addelem(t_list **stack, char *new_chislo);

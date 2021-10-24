@@ -6,13 +6,11 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/24 15:37:00 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:52:16 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	check_int(t_list **stack_a);
 
 int	main(int argc, char **argv)
 {
@@ -30,11 +28,6 @@ int	main(int argc, char **argv)
 		return (0);
 	data.massiv = create_massiv(argc, argv);
 	data.stack_a = create_list(argc, argv, data.massiv);
-	if (check_int(&data.stack_a) < 0)
-	{
-		write (1, "Error\n", 6);
-		return (0);
-	}
 	data.next = 1;
 	data.argc = argc;
 	data.stack_b = NULL;
@@ -44,20 +37,6 @@ int	main(int argc, char **argv)
 		temp = data.stack_a;
 		data.stack_a = temp->prev;
 		free(temp);
-	}
-	return (0);
-}
-
-static int	check_int(t_list **stack_a)
-{
-	t_list *iterator;
-
-	iterator = (*stack_a);
-	while (iterator != NULL)
-	{
-		if (iterator->chislo > 2147483647 || iterator->chislo < -2147483648)
-			return (-1);
-		iterator = iterator->prev;
 	}
 	return (0);
 }

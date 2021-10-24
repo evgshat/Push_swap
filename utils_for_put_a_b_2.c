@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/19 23:57:09 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/24 15:53:33 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*find_last(t_list **stack_b)
 	return (last);
 }
 
-int	ft_atoi(const char *string)
+long	ft_atoi(const char *string)
 {
 	int				i;
 	int				sign;
@@ -50,5 +50,5 @@ int	ft_atoi(const char *string)
 		res = res * 10 + (string[i++] - '0');
 	if (sign == -1)
 		return (res * sign);
-	return ((int)res);
+	return (res);
 }

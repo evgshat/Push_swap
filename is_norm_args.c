@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/20 00:00:11 by lcharlet         ###   ########.fr       */
+/*   Updated: 2021/10/24 16:03:52 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 static int	already_sort(int argc, char **argv);
 static int	check_on_wrong_args(int *argc, char **argv, int *i, int *j);
 static void	next(int *i, int *j);
+static int	check_int(int argc, char **argv);
 
 int	is_norm_args(int argc, char **argv)
 {
 	int	i;
 	int	j;
-	int	is_double;
-	int	alr_sort;
 	int	res;
 
 	i = 1;
@@ -30,11 +29,14 @@ int	is_norm_args(int argc, char **argv)
 	res = check_on_wrong_args(&argc, argv, &i, &j);
 	if (res != 0)
 		return (-1);
-	is_double = check_double(argc, argv);
-	if (is_double < 0)
+	res = check_int(argc, argv);
+	if (res < 0)
 		return (-1);
-	alr_sort = already_sort(argc, argv);
-	if (alr_sort == 0)
+	res = check_double(argc, argv);
+	if (res < 0)
+		return (-1);
+	res = already_sort(argc, argv);
+	if (res == 0)
 		return (2);
 	return (0);
 }
@@ -85,6 +87,20 @@ static int	already_sort(int argc, char **argv)
 			i--;
 		else
 			return (-1);
+	}
+	return (0);
+}
+
+static int	check_int(int argc, char **argv)
+{
+	int	i;
+
+	i = argc - 1;
+	while (i >= 1)
+	{
+		if (ft_atoi(argv[i]) > 2147483647 || ft_atoi(argv[i]) < -2147483648)
+			return (-1);
+		i--;
 	}
 	return (0);
 }
