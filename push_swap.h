@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 16:30:51 by lcharlet          #+#    #+#             */
-/*   Updated: 2021/10/24 16:33:49 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2021/10/25 20:01:48 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,5 @@ t_list		*find_last(t_list **stack_b);
 int			qnty_els_in_stack(t_list **stack);
 int			check_next_element(t_list **stack_a,
 				t_list **stack_b, t_data *data);
-
-//checker
-char	*get_next_line(int fd);
-void	ss_bonus(t_list **stack_a, t_list **stack_b);
-void	rr_bonus(t_list **stack_a, t_list **stack_b);
-void	rrr_bonus(t_list **stack_a, t_list **stack_b);
-void	pa_bonus(t_list **stack_a, t_list **stack_b);
-void	pb_bonus(t_list **stack_a, t_list **stack_b);
 
 #endif
