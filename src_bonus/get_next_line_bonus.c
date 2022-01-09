@@ -1,4 +1,4 @@
-#include "push_swap_bonus.h"
+#include "get_next_line_bonus.h"
 
 static void	point_not_null(char *point, char **line, char **ost)
 {
@@ -75,7 +75,9 @@ char	*get_next_line(int fd)
 	if (gnl.point != NULL)
 		return (gnl.line);
 	gnl.buf = (char *) malloc(sizeof(char) * BUFFER_SIZE + 1);
+	printf("before read\n");
 	gnl.byte_was_read = read(fd, gnl.buf, BUFFER_SIZE);
+	printf("after read\n");
 	while (!gnl.point && (gnl.byte_was_read != 0))
 		if (loop(fd, &gnl, &ost) == 1)
 			return (gnl.line);
@@ -85,4 +87,22 @@ char	*get_next_line(int fd)
 	else
 		free(gnl.line);
 	return (NULL);
+}
+
+int main()
+{
+	char *line;
+	line = malloc(10000);
+	if (!line)
+	{
+		write(1, "ERROR\n", 6);
+		exit(0);
+	}
+	line = get_next_line(0);
+	if (!line)
+	{
+		write(1, "ERROR\n", 6);
+		exit(0);
+	}
+	printf("%s", line);
 }

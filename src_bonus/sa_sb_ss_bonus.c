@@ -6,18 +6,20 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 16:45:26 by lcharlet         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:55:39 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-void	sa(t_list **stack, int is_ss)
+int	sa(t_list **stack)
 {
 	t_list	*ch_top;
 	t_list	*ch_top_minus_minus;
 
 	ch_top = *stack;
+	if ((*stack)->prev == NULL)
+		return (0);
 	if ((*stack)->prev->prev != NULL)
 		ch_top_minus_minus = (*stack)->prev->prev;
 	else
@@ -29,16 +31,18 @@ void	sa(t_list **stack, int is_ss)
 		ch_top_minus_minus->next = ch_top;
 	ch_top->next = *stack;
 	ch_top->prev = ch_top_minus_minus;
-	if (!is_ss)
-		write(1, "sa\n", 3);
+
+	return (0);
 }
 
-void	sb(t_list **stack, int is_ss)
+int	sb(t_list **stack)
 {
 	t_list	*ch_top;
 	t_list	*ch_top_minus_minus;
 
 	ch_top = *stack;
+	if ((*stack)->prev == NULL)
+		return (0);
 	if ((*stack)->prev->prev != NULL)
 		ch_top_minus_minus = (*stack)->prev->prev;
 	else
@@ -50,13 +54,11 @@ void	sb(t_list **stack, int is_ss)
 		ch_top_minus_minus->next = ch_top;
 	ch_top->next = *stack;
 	ch_top->prev = ch_top_minus_minus;
-	if (!is_ss)
-		write(1, "sb\n", 3);
+	return (0);
 }
 
 void	ss(t_list **stack_a, t_list **stack_b)
 {
-	sa(stack_a, 1);
-	sb(stack_b, 1);
-	write(1, "ss\n", 3);
+	sa(stack_a);
+	sb(stack_b);
 }

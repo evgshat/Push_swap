@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 17:54:25 by lcharlet         ###   ########.fr       */
+/*   Updated: 2022/01/09 23:13:16 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	top_down(t_list **stack_a, t_list **stack_b, t_data *data)
 			if ((*stack_b) && (*stack_b)->order < data->next)
 				ss(stack_a, stack_b);
 			else
-				sa(stack_a, 0);
+				sa(stack_a);
 		}
 		if ((*stack_b) && (*stack_b)->order < data->next)
 			rr(stack_a, stack_b);
 		else
-			ra(stack_a, 0);
+			ra(stack_a);
 		data->next++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 16:45:42 by lcharlet         ###   ########.fr       */
+/*   Updated: 2022/01/09 23:15:19 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	pa_two(t_list **stack_a, t_list	*buf);
 static void	pb_two(t_list **stack_b, t_list	*buf);
 
-void	pa(t_list **stack_a, t_list **stack_b)
+int	pa(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*buf;
 
@@ -35,14 +35,18 @@ void	pa(t_list **stack_a, t_list **stack_b)
 	else
 		pa_two(stack_a, buf);
 	free (buf);
-	write(1, "pa\n", 3);
+	return (0);
 }
 
-void	pb(t_list **stack_a, t_list **stack_b)
+int	pb(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*buf;
+	// printf("111");
 
 	buf = *stack_a;
+	// printf("111");
+	// if ((*stack_a) == NULL)
+	// 	return (0);
 	*stack_a = (*stack_a)->prev;
 	(*stack_a)->next = NULL;
 	if (!(*stack_b))
@@ -57,7 +61,7 @@ void	pb(t_list **stack_a, t_list **stack_b)
 	else
 		pb_two(stack_b, buf);
 	free (buf);
-	write(1, "pb\n", 3);
+	return (0);
 }
 
 static void	pa_two(t_list **stack_a, t_list	*buf)

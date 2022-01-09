@@ -6,13 +6,13 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 16:45:33 by lcharlet         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:03:29 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-void	ra(t_list **stack, int is_rr)
+void	ra(t_list **stack)
 {
 	t_list	*buf;
 	t_list	*iterator;
@@ -28,11 +28,9 @@ void	ra(t_list **stack, int is_rr)
 	iterator->prev = buf;
 	buf->prev = NULL;
 	buf->next = iterator;
-	if (!is_rr)
-		write(1, "ra\n", 3);
 }
 
-void	rb(t_list **stack, int is_rr)
+void	rb(t_list **stack)
 {
 	t_list	*buf;
 	t_list	*iterator;
@@ -48,13 +46,10 @@ void	rb(t_list **stack, int is_rr)
 	iterator->prev = buf;
 	buf->prev = NULL;
 	buf->next = iterator;
-	if (!is_rr)
-		write(1, "rb\n", 3);
 }
 
 void	rr(t_list **stack_a, t_list **stack_b)
 {
-	ra(stack_a, 1);
-	rb(stack_b, 1);
-	write(1, "rr\n", 3);
+	ra(stack_a);
+	rb(stack_b);
 }
