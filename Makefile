@@ -24,8 +24,6 @@ SRCS =	./src/addelem.c \
 
 SRCS_B =	./src_bonus/main_bonus.c \
 			./src_bonus/pa_pb_bonus.c \
-			./src_bonus/put_in_a_bonus.c \
-			./src_bonus/put_in_b_bonus.c \
 			./src_bonus/ra_rb_rr_bonus.c \
 			./src_bonus/rra_rrb_rrr_bonus.c \
 			./src_bonus/sa_sb_ss_bonus.c \
@@ -38,6 +36,8 @@ SRCS_B =	./src_bonus/main_bonus.c \
 			./src_bonus/check_double_bonus.c \
 			./src_bonus/check_next_element_bonus.c \
 			./src_bonus/utils_for_put_a_b_bonus.c \
+			./src_bonus/get_next_line_bonus.c \
+			./src_bonus/get_next_line_utils_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
