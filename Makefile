@@ -1,30 +1,49 @@
-SRCS = addelem.c \
-		init_list.c \
-		is_norm_args.c \
-		main.c \
-		sa_sb_ss.c \
-		create_list.c \
-		pa_pb.c \
-		ra_rb_rr.c \
-		sort_two_el.c \
-		sort_three_el.c \
-		rra_rrb_rrr.c \
-		sort_four_el.c \
-		sort_five_el.c \
-		create_massiv.c \
-		algoritm.c \
-		put_in_a.c \
-		back_to_b.c \
-		sort_second_half.c \
-		put_in_b.c \
-		utils_for_put_a_b.c \
-		utils_for_put_a_b_2.c \
-		check_double.c \
-		check_next_element.c
+SRCS =	./src/addelem.c \
+		./src/init_list.c \
+		./src/is_norm_args.c \
+		./src/main.c \
+		./src/sa_sb_ss.c \
+		./src/create_list.c \
+		./src/pa_pb.c \
+		./src/ra_rb_rr.c \
+		./src/sort_two_el.c \
+		./src/sort_three_el.c \
+		./src/rra_rrb_rrr.c \
+		./src/sort_four_el.c \
+		./src/sort_five_el.c \
+		./src/create_massiv.c \
+		./src/algoritm.c \
+		./src/put_in_a.c \
+		./src/back_to_b.c \
+		./src/sort_second_half.c \
+		./src/put_in_b.c \
+		./src/utils_for_put_a_b.c \
+		./src/utils_for_put_a_b_2.c \
+		./src/check_double.c \
+		./src/check_next_element.c
+
+SRCS_B =	./src_bonus/main_bonus.c \
+			./src_bonus/pa_pb_bonus.c \
+			./src_bonus/put_in_a_bonus.c \
+			./src_bonus/put_in_b_bonus.c \
+			./src_bonus/ra_rb_rr_bonus.c \
+			./src_bonus/rra_rrb_rrr_bonus.c \
+			./src_bonus/sa_sb_ss_bonus.c \
+			./src_bonus/create_list_bonus.c \
+			./src_bonus/is_norm_args_bonus.c \
+			./src_bonus/init_list_bonus.c \
+			./src_bonus/addelem_bonus.c \
+			./src_bonus/utils_for_put_a_b_2_bonus.c \
+			./src_bonus/create_massiv_bonus.c \
+			./src_bonus/check_double_bonus.c \
+			./src_bonus/check_next_element_bonus.c \
+			./src_bonus/utils_for_put_a_b_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
 
 NAME = push_swap
+NAME_B = checker
 
 CFLAGS = -Werror -Wall -Wextra -g
 
@@ -33,6 +52,7 @@ CC = gcc
 RM = rm -rf
 
 HEADER = push_swap.h
+HEADER_B = push_swap_bonus.h
 
 all: $(NAME)
 
@@ -42,11 +62,19 @@ $(NAME): $(OBJS)
 %.o: %.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: $(NAME_B)
+
+$(NAME_B): $(OBJS_B)
+	$(CC) $(CFLAGS) $(OBJS_B) -o $@
+
+%.o: %.c $(HEADER_B) Makefile
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(OBJS_B)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_B)
 
 re: fclean all
 
