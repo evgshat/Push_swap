@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 16:41:09 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 23:10:19 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 12:20:33 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,18 @@ typedef struct s_check
 // instr
 int		sa(t_list **stack);
 int		sb(t_list **stack);
-void		ss(t_list **stack_a, t_list **stack_b);
+int		ss(t_list **stack_a, t_list **stack_b);
 //
 int		pa(t_list **stack_a, t_list **stack_b);
 int		pb(t_list **stack_a, t_list **stack_b);
 //
-void		ra(t_list **stack);
-void		rb(t_list **stack);
-void		rr(t_list **stack_a, t_list **stack_b);
+int		ra(t_list **stack);
+int		rb(t_list **stack);
+int		rr(t_list **stack_a, t_list **stack_b);
 //
-void		rra(t_list **stack);
-void		rrb(t_list **stack);
-void		rrr(t_list **stack_a, t_list **stack_b);
+int		rra(t_list **stack);
+int		rrb(t_list **stack);
+int		rrr(t_list **stack_a, t_list **stack_b);
 
 size_t	ft_strlen (const char *str);
 

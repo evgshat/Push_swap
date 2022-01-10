@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 22:55:39 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 12:36:59 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	sa(t_list **stack)
 	t_list	*ch_top;
 	t_list	*ch_top_minus_minus;
 
-	ch_top = *stack;
-	if ((*stack)->prev == NULL)
+	if ((*stack)->prev == NULL || (*stack) == NULL)
 		return (0);
+	ch_top = *stack;
 	if ((*stack)->prev->prev != NULL)
 		ch_top_minus_minus = (*stack)->prev->prev;
 	else
@@ -31,7 +31,6 @@ int	sa(t_list **stack)
 		ch_top_minus_minus->next = ch_top;
 	ch_top->next = *stack;
 	ch_top->prev = ch_top_minus_minus;
-
 	return (0);
 }
 
@@ -40,9 +39,9 @@ int	sb(t_list **stack)
 	t_list	*ch_top;
 	t_list	*ch_top_minus_minus;
 
-	ch_top = *stack;
-	if ((*stack)->prev == NULL)
+	if ((*stack)->prev == NULL || (*stack) == NULL)
 		return (0);
+	ch_top = *stack;
 	if ((*stack)->prev->prev != NULL)
 		ch_top_minus_minus = (*stack)->prev->prev;
 	else
@@ -57,8 +56,12 @@ int	sb(t_list **stack)
 	return (0);
 }
 
-void	ss(t_list **stack_a, t_list **stack_b)
+int	ss(t_list **stack_a, t_list **stack_b)
 {
+	if ((*stack_a)->prev == NULL || (*stack_a) == NULL
+		|| (*stack_b)->prev == NULL || (*stack_b) == NULL)
+		return (0);
 	sa(stack_a);
 	sb(stack_b);
+	return (0);
 }

@@ -6,26 +6,11 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 16:13:54 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 23:17:16 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 15:45:37 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-// должен читать инструкции из стандартного ввода, после которой /n
-// вроде чекер должен выполнить все инструкции на аргументах
-// если все ок - чекер пишет "OK\n", иначе "KO\n"
-// если ошибка в аргуменах - "Error\n" - не integer, больше, чем integer, есть дубли, не существует такой инструкции или некорректный формат (инструкции?)
-
 #include "push_swap_bonus.h"
-
-// int	ft_strlen(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (str[i])
-// 		i++;
-// 	return (i);
-// }
 
 void error(char *str)
 {
@@ -52,10 +37,7 @@ static void	check_instr(t_data *data, char *line)
 	else if (line[0] == 'p' && line[1] == 'a' && line[2] == '\n')
 		pa(&data->stack_a, &data->stack_b);
 	else if (line[0] == 'p' && line[1] == 'b' && line[2] == '\n')
-	{
-		printf("111");
 		pb(&data->stack_a, &data->stack_b);
-	}
 	else if (line[0] == 'r' && line[1] == 'a' && line[2] == '\n')
 		ra(&data->stack_a);
 	else if (line[0] == 'r' && line[1] == 'b' && line[2] == '\n')
@@ -93,12 +75,13 @@ int	result(t_data *data)
 void	checker(t_data *data)
 {
 	char *line;
-	printf("222");
+	(void)data;
 
 	line = get_next_line(0);
+	if (!line)
+		exit (0);
 	while (line)
 	{
-		printf("222");
 		printf("%s", line);
 		check_instr(data, line);
 		free(line);
@@ -110,12 +93,12 @@ void	checker(t_data *data)
 
 int main(int argc, char **argv)
 {
-	printf("2222");
 	t_data	data;
+	printf("222");
+	printf("222");
 
 	if (argc >= 2)
 	{
-		printf("2222");
 		if ((data.res = is_norm_args(argc, argv) < 0))
 			error("Error\n");
 		data.stack_a = create_list(argc, argv);

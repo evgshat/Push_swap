@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 23:15:19 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 12:26:27 by lcharlet         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	pa(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*buf;
 
+	if ((*stack_a) == NULL)
+		return (0);
+	if ((*stack_b) == NULL)
+		return (0);
+	if ((*stack_a)->prev == NULL)
+		return (0);
+	if ((*stack_b)->prev == NULL)
+		return (0);
 	buf = *stack_b;
 	*stack_b = (*stack_b)->prev;
 	if (*stack_b != NULL)
@@ -41,12 +49,16 @@ int	pa(t_list **stack_a, t_list **stack_b)
 int	pb(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*buf;
-	// printf("111");
 
+	if ((*stack_a) == NULL)
+		return (0);
+	if ((*stack_b) == NULL)
+		return (0);
+	if ((*stack_a)->prev == NULL)
+		return (0);
+	if ((*stack_b)->prev == NULL)
+		return (0);
 	buf = *stack_a;
-	// printf("111");
-	// if ((*stack_a) == NULL)
-	// 	return (0);
 	*stack_a = (*stack_a)->prev;
 	(*stack_a)->next = NULL;
 	if (!(*stack_b))
