@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/10 12:36:59 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 18:22:33 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	sa(t_list **stack)
 	t_list	*ch_top;
 	t_list	*ch_top_minus_minus;
 
-	if ((*stack)->prev == NULL || (*stack) == NULL)
+	if ((*stack) == NULL || (*stack)->prev == NULL)
 		return (0);
 	ch_top = *stack;
 	if ((*stack)->prev->prev != NULL)
@@ -39,7 +39,7 @@ int	sb(t_list **stack)
 	t_list	*ch_top;
 	t_list	*ch_top_minus_minus;
 
-	if ((*stack)->prev == NULL || (*stack) == NULL)
+	if ((*stack) == NULL || (*stack)->prev == NULL)
 		return (0);
 	ch_top = *stack;
 	if ((*stack)->prev->prev != NULL)

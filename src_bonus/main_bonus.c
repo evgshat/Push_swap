@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 16:13:54 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/10 15:45:37 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 17:54:15 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	check_instr(t_data *data, char *line)
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'a' && line[3] == '\n')
 		rra(&data->stack_a);
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'b' && line[3] == '\n')
-		rra(&data->stack_b);
+		rrb(&data->stack_b);
 	else if (line[0] == 'r' && line[1] == 'r' && line[2] == 'r' && line[3] == '\n')
 		rrr(&data->stack_a, &data->stack_b);
 	else
@@ -82,7 +82,6 @@ void	checker(t_data *data)
 		exit (0);
 	while (line)
 	{
-		printf("%s", line);
 		check_instr(data, line);
 		free(line);
 		line = get_next_line(0);
@@ -94,8 +93,6 @@ void	checker(t_data *data)
 int main(int argc, char **argv)
 {
 	t_data	data;
-	printf("222");
-	printf("222");
 
 	if (argc >= 2)
 	{

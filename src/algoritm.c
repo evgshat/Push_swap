@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/09 16:36:29 by lcharlet         ###   ########.fr       */
+/*   Updated: 2022/01/10 18:07:22 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	algoritm(t_list **stack_a, t_list **stack_b, t_data *data)
 	data->max_order = find_max_order(stack_a);
 	data->mid_order = data->max_order / 2 + data->next;
 	put_in_b(stack_a, stack_b, data);
-	while (find_last(stack_a)->order != data->mid_order)
+	while (find_last(stack_a)->order != data->mid_order && !is_sorted(stack_a))
 	{
 		while (put_in_a(stack_a, stack_b, data) > 0)
 			;

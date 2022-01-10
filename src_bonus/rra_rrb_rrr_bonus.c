@@ -6,7 +6,7 @@
 /*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 15:55:40 by lcharlet          #+#    #+#             */
-/*   Updated: 2022/01/10 12:42:36 by lcharlet         ###   ########lyon.fr   */
+/*   Updated: 2022/01/10 18:23:38 by lcharlet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	rra(t_list **stack)
 	t_list	*buf;
 	t_list	*bbuf;
 
-	if ((*stack)->prev == NULL || (*stack) == NULL)
+	if (*stack == NULL || (*stack)->prev == NULL)
 		return (0);
 	while ((*stack)->prev != NULL)
 		*stack = (*stack)->prev;
@@ -39,7 +39,7 @@ int	rrb(t_list **stack)
 	t_list	*buf;
 	t_list	*bbuf;
 
-	if (((*stack)->prev == NULL) || ((*stack) == NULL))
+	if (((*stack) == NULL) || ((*stack)->prev == NULL))
 		return (0);
 	while ((*stack)->prev != NULL)
 		*stack = (*stack)->prev;
