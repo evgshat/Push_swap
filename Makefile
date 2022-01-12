@@ -38,6 +38,7 @@ SRCS_B =	./src_bonus/main_bonus.c \
 			./src_bonus/utils_for_put_a_b_bonus.c \
 			./src_bonus/get_next_line_bonus.c \
 			./src_bonus/get_next_line_utils_bonus.c \
+			./src_bonus/utils_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
@@ -62,7 +63,7 @@ $(NAME): $(OBJS)
 %.o: %.c $(HEADER) Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bonus: $(NAME_B)
+bonus: $(NAME_B) $(NAME)
 
 $(NAME_B): $(OBJS_B)
 	$(CC) $(CFLAGS) $(OBJS_B) -o $@

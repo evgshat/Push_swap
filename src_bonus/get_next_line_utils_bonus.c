@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcharlet <lcharlet@student.21-school.ru    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/12 12:38:15 by lcharlet          #+#    #+#             */
+/*   Updated: 2022/01/12 12:38:16 by lcharlet         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
-char	*ft_strchr (const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	char	*new_s;
 	char	ch;
@@ -22,7 +34,7 @@ char	*ft_strchr (const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen (const char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
